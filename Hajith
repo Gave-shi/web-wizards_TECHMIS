@@ -5,22 +5,42 @@ USE SIMS;
 
 CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     Stu_reg_num CHAR(10) NOT NULL,
-    Weak1 VARCHAR(20),
-    Weak2 VARCHAR(20),
-    Weak3 VARCHAR(20),
-    Weak4 VARCHAR(20),
-    Weak5 VARCHAR(20),
-    Weak6 VARCHAR(20),
-    Weak7 VARCHAR(20),
-    Weak8 VARCHAR(20),
-    Weak9 VARCHAR(20),
-    Weak10 VARCHAR(20),
-    Weak11 VARCHAR(20),
-    Weak12 VARCHAR(20),
-    Weak13 VARCHAR(20),
-    Weak14 VARCHAR(20),
-    Weak15 VARCHAR(20),
-    Percentage DECIMAL(5,2));
+    Weak1 VARCHAR(20) NOT NULL,
+    Weak2 VARCHAR(20) NOT NULL,
+    Weak3 VARCHAR(20) NOT NULL,
+    Weak4 VARCHAR(20) NOT NULL,
+    Weak5 VARCHAR(20) NOT NULL,
+    Weak6 VARCHAR(20) NOT NULL,
+    Weak7 VARCHAR(20) NOT NULL,
+    Weak8 VARCHAR(20) NOT NULL,
+    Weak9 VARCHAR(20) NOT NULL,
+    Weak10 VARCHAR(20)NOT NULL,
+    Weak11 VARCHAR(20)NOT NULL,
+    Weak12 VARCHAR(20)NOT NULL,
+    Weak13 VARCHAR(20)NOT NULL,
+    Weak14 VARCHAR(20)NOT NULL,
+    Weak15 VARCHAR(20)NOT NULL,
+    Percentage DECIMAL(5,2)NOT NULL);
+
+    CREATE TABLE Eligibility
+    (Stu_reg_num CHAR(7) NOT NULL,
+    course_id CHAR(10) NOT NULL,
+    eligibility_type varchar(50) NOT NULL,
+    eligibility_status VARCHAR(50) NOT NULL);
+
+    CREATE TABLE Final_Marks
+    (Stu_reg_num CHAR(7) NOT NULL,
+    course_id CHAR(10) NOT NULL,
+    final_marks INT NOT NULL,
+    grade CHAR(2),
+    gpa DECIMAL(5,4));
+
+    CREATE TABLE Tech_officer
+    (tech_id CHAR(7) PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL, 
+    last_name VARCHAR(50) NOT NULL,
+    tech_mobie INT,
+    email VARCHAR(255) NOT NULL);
 
 
 INSERT INTO Student_Attandance (Stu_reg_num, Course_Id, weak1, weak2, weak3, weak4, weak5, weak6, weak7, weak8, weak9, weak10, weak11, weak12, weak13, weak14, weak15) VALUES
@@ -104,5 +124,4 @@ INSERT INTO Student_Attandance (Stu_reg_num, Course_Id, weak1, weak2, weak3, wea
 ('TG1087', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG1087', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG1087', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
-
 
