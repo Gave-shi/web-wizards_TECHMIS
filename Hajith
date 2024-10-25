@@ -143,5 +143,3 @@ INSERT INTO Student_Attandance (Stu_reg_num, Course_Id, week_01, week_02, week_0
 ('TG1087', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG1087', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 
-INSERT INTO Student_Attandance  Percentage 
-VALUE(count)
