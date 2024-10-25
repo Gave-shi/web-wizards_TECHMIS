@@ -5,23 +5,41 @@ USE SIMS;
 
 CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     Stu_reg_num CHAR(10) NOT NULL,
-    Weak1 VARCHAR(20) NOT NULL,
-    Weak2 VARCHAR(20) NOT NULL,
-    Weak3 VARCHAR(20) NOT NULL,
-    Weak4 VARCHAR(20) NOT NULL,
-    Weak5 VARCHAR(20) NOT NULL,
-    Weak6 VARCHAR(20) NOT NULL,
-    Weak7 VARCHAR(20) NOT NULL,
-    Weak8 VARCHAR(20) NOT NULL,
-    Weak9 VARCHAR(20) NOT NULL,
-    Weak10 VARCHAR(20)NOT NULL,
-    Weak11 VARCHAR(20)NOT NULL,
-    Weak12 VARCHAR(20)NOT NULL,
-    Weak13 VARCHAR(20)NOT NULL,
-    Weak14 VARCHAR(20)NOT NULL,
-    Weak15 VARCHAR(20)NOT NULL,
-    Percentage DECIMAL(5,2)NOT NULL);
-
+    Week_01 VARCHAR(20) NOT NULL,
+    Week_02 VARCHAR(20) NOT NULL,
+    Week_03 VARCHAR(20) NOT NULL,
+    Week_04 VARCHAR(20) NOT NULL,
+    Week_05 VARCHAR(20) NOT NULL,
+    Week_06 VARCHAR(20) NOT NULL,
+    Week_07 VARCHAR(20) NOT NULL,
+    Week_08 VARCHAR(20) NOT NULL,
+    Week_09 VARCHAR(20) NOT NULL,
+    Week_10 VARCHAR(20)NOT NULL,
+    Week_11 VARCHAR(20)NOT NULL,
+    Week_12 VARCHAR(20)NOT NULL,
+    Week_13 VARCHAR(20)NOT NULL,
+    Week_14 VARCHAR(20)NOT NULL,
+    Week_15 VARCHAR(20)NOT NULL,
+    Percentage DECIMAL(5,2) GENERATED ALWAYS AS (
+        (
+            (CASE WHEN Week_01 = 'AB' THEN 0 WHEN Week_01 = 'MC' THEN 1 ELSE CAST(Week_01 AS SIGNED) END +
+            CASE WHEN Week_02 = 'AB' THEN 0 WHEN Week_02 = 'MC' THEN 1 ELSE CAST(Week_02 AS SIGNED) END +
+            CASE WHEN Week_03 = 'AB' THEN 0 WHEN Week_03 = 'MC' THEN 1 ELSE CAST(Week_03 AS SIGNED) END +
+            CASE WHEN Week_04 = 'AB' THEN 0 WHEN Week_04 = 'MC' THEN 1 ELSE CAST(Week_04 AS SIGNED) END +
+            CASE WHEN Week_05 = 'AB' THEN 0 WHEN Week_05 = 'MC' THEN 1 ELSE CAST(Week_05 AS SIGNED) END +
+            CASE WHEN Week_06 = 'AB' THEN 0 WHEN Week_06 = 'MC' THEN 1 ELSE CAST(Week_06 AS SIGNED) END +
+            CASE WHEN Week_07 = 'AB' THEN 0 WHEN Week_07 = 'MC' THEN 1 ELSE CAST(Week_07 AS SIGNED) END +
+            CASE WHEN Week_08 = 'AB' THEN 0 WHEN Week_08 = 'MC' THEN 1 ELSE CAST(Week_08 AS SIGNED) END +
+            CASE WHEN Week_09 = 'AB' THEN 0 WHEN Week_09 = 'MC' THEN 1 ELSE CAST(Week_09 AS SIGNED) END +
+            CASE WHEN Week_10 = 'AB' THEN 0 WHEN Week_10 = 'MC' THEN 1 ELSE CAST(Week_10 AS SIGNED) END +
+            CASE WHEN Week_11 = 'AB' THEN 0 WHEN Week_11 = 'MC' THEN 1 ELSE CAST(Week_11 AS SIGNED) END +
+            CASE WHEN Week_12 = 'AB' THEN 0 WHEN Week_12 = 'MC' THEN 1 ELSE CAST(Week_12 AS SIGNED) END +
+            CASE WHEN Week_13 = 'AB' THEN 0 WHEN Week_13 = 'MC' THEN 1 ELSE CAST(Week_13 AS SIGNED) END +
+            CASE WHEN Week_14 = 'AB' THEN 0 WHEN Week_14 = 'MC' THEN 1 ELSE CAST(Week_14 AS SIGNED) END +
+            CASE WHEN Week_15 = 'AB' THEN 0 WHEN Week_15 = 'MC' THEN 1 ELSE CAST(Week_15 AS SIGNED) END
+            ) / 15 * 100
+        )
+    ) STORED);
     CREATE TABLE Eligibility
     (Stu_reg_num CHAR(7) NOT NULL,
     course_id CHAR(10) NOT NULL,
@@ -43,7 +61,7 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     email VARCHAR(255) NOT NULL);
 
 
-INSERT INTO Student_Attandance (Stu_reg_num, Course_Id, weak1, weak2, weak3, weak4, weak5, weak6, weak7, weak8, weak9, weak10, weak11, weak12, weak13, weak14, weak15) VALUES
+INSERT INTO Student_Attandance (Stu_reg_num, Course_Id, week_01, week_02, week_03, week_04, week_05, week_06, week_07, week_08, week_09, week_10, week_11, week_12, week_13, week_14, week_15) VALUES
 ('TG1021', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG1021', 'ENG1222', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', 'MC', '1', 'AB', '1', '1', '1'),
 ('TG1021', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
