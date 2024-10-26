@@ -60,6 +60,20 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     tech_mobie INT,
     email VARCHAR(255) NOT NULL);
 
+    CREATE TABLE eng1222_course_marks (
+    student_id varchar(10) NOT NULL,
+    quiz_1 decimal(5,2) NOT NULL DEFAULT 0.00,
+    quiz_2 decimal(5,2) NOT NULL DEFAULT 0.00,
+    quiz_3 decimal(5,2) NOT NULL DEFAULT 0.00,
+    final_quiz_marks decimal(5,2) GENERATED ALWAYS AS ((quiz_1 + quiz_2 + quiz_3- least(quiz_1,quiz_2,quiz_3)) / 2 * 0.15) STORED,
+    mid_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
+    end_exam_marks decimal(5,2) NOT NULL DEFAULT 0.00,
+    CA_total_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks + mid_exam_marks * 0.25) STORED,
+    final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks +mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
+    );
+
+    INSERT INTO eng1222_course_marks (student_id, quiz_1, quiz_2, quiz_3,mid_exam_marks,end_exam_marks) VALUES
+    ('TG1021', 58.00, 40.00, 89.00, 90.00, 85.00);
 
 INSERT INTO Student_Attandance (Stu_reg_num, Course_Id, week_01, week_02, week_03, week_04, week_05, week_06, week_07, week_08, week_09, week_10, week_11, week_12, week_13, week_14, week_15) VALUES
 ('TG1021', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
