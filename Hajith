@@ -43,15 +43,9 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     CREATE TABLE Eligibility
     (Stu_reg_num CHAR(7) NOT NULL,
     course_id CHAR(10) NOT NULL,
-    eligibility_type varchar(50) NOT NULL,
+    ca_eligibility VARCHAR(50) GENERATED ALWAYS AS (SELECT CA_total_marks FROM ),
+    attandance_eligibility VARCHAR(50) NOT NULL,
     eligibility_status VARCHAR(50) NOT NULL);
-
-    CREATE TABLE Final_Marks
-    (Stu_reg_num CHAR(7) NOT NULL,
-    course_id CHAR(10) NOT NULL,
-    final_marks INT NOT NULL,
-    grade CHAR(2),
-    gpa DECIMAL(5,4));
 
     CREATE TABLE Tech_officer
     (tech_id CHAR(7) PRIMARY KEY,
