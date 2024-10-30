@@ -69,8 +69,20 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     ('TG1021', 58.00, 40.00, 89.00, 90.00, 85.00);
 	
 	CREATE TABLE Student_grade(student_id char(10) NOT NULL,
-	Course_Id CHAR(7) NOT NULL,
-	Final_marks int NOT NULL
+	Course_Id CHAR(7) NOT NULL
+	Final_marks int NOT NULL,
+    grade VARCHAR(5) GENERATED ALWAYS AS (CASE WHEN Final_marks>=90 THEN "A+"
+    WHEN Final_marks>=85 THEN "A"
+    WHEN Final_marks>=80 THEN "A"
+    WHEN Final_marks>=75 THEN "B+"
+    WHEN Final_marks>=70 THEN "B" 
+    WHEN Final_marks>=65 THEN "B-"
+    WHEN Final_marks>=60 THEN "C+"
+    WHEN Final_marks>=55 THEN "C"
+    WHEN Final_marks>=50 THEN "C-"
+    WHEN Final_marks>=45 THEN "5"
+    else "E"
+    END)
 	);
 	
 	INSERT INTO Student_grade
