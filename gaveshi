@@ -292,5 +292,20 @@ VALUES
 
 
 
+ /*CREATE VIEW to get whole batch CA Summary using course code*/
+ CREATE VIEW  CA_Summary_of_Whole_Batch
+ SELECT 
+ COUNT (student_id) AS Total Students of the batch,
+ MARKS.CouName,
+ AVG (MARKS.Final_CA_marks) AS Average_marks_of_the_Batch,
+ MIN (MARKS.Final_CA_marks) AS Minimum_marks_of_the_Batch,
+ MAX (MARKS.Final_CA_marks) AS Maximum_marks_of_the_Batch,
+ CASE 
+   WHEN status='repeat' THEN 'Repeated'
+   ELSE 'proper'
+ END AS student_state,  
 
- 
+ FROM MARKS
+ INNER JOIN STUDENT ON STUDENT.student_id=MARKS.student_id
+
+ GROUP BY CouId; 
