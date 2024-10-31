@@ -227,14 +227,7 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
 	
 	CREATE TABLE Student_grade (
     student_id CHAR(10) NOT NULL,
-    ENG1222 CHAR(7) NOT NULL,
-    ICT1212 CHAR(7) NOT NULL,
-    ICT1222 CHAR(7) NOT NULL,
-    ICT1233 CHAR(7) NOT NULL,
-    ICT1242 CHAR(7) NOT NULL,
-    ICT1253 CHAR(7) NOT NULL,
-    TMS1233 CHAR(7) NOT NULL,
-    TCS1212 CHAR(7) NOT NULL,
+    Course_id CHAR(7) NOT NULL,
     Final_marks DECIMAL(5,2) NOT NULL,
     grade VARCHAR(5) GENERATED ALWAYS AS (
         CASE 
@@ -258,7 +251,7 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
 	'(SELECT final_marks FROM eng1222_course_marks
 	WHERE student_id="TG1021")');
 	
-	INSERT INTO Student_grade (student_id, course_id, final_marks)
+	INSERT INTO Student_grade (student_id, Course_id, final_marks)
 VALUES ('TG1021', 'eng1222', (SELECT final_marks FROM eng1222_course_marks WHERE student_id = 'TG1021'));
 
 DELIMITER //
@@ -268,29 +261,20 @@ BEGIN
     DECLARE done INT DEFAULT FALSE;
     DECLARE student_id_char CHAR(10);
     DECLARE final_marks_value DECIMAL(5,2);
-
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, final_marks FROM (concat(courseId,"_course_marks"));
-
-
+        SELECT student_id, final_marks FROM eng1222_course_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-
     OPEN student_cursor;
-
-
     read_loop: LOOP
-
         FETCH student_cursor INTO student_id_char, final_marks_value;
         IF done THEN
             LEAVE read_loop;
         END IF;
-        INSERT INTO Student_grade (student_id, courseId, Final_marks)
+        INSERT INTO Student_grade (student_id, Course_id, Final_marks)
         VALUES (student_id_char, courseId, final_marks_value);
     END LOOP;
     CLOSE student_cursor;
 END //
-
 DELIMITER ;
 
 
