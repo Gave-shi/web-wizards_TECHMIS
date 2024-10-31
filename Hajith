@@ -225,6 +225,16 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     ('TG1025', 58.00, 40.00, 89.00, 90.00, 85.00),
     ('TG1026', 58.00, 40.00, 89.00, 90.00, 85.00);
 	
+
+
+
+
+
+
+
+
+
+    
 	CREATE TABLE Student_grade (
     student_id CHAR(10) NOT NULL,
     Course_id CHAR(7) NOT NULL,
