@@ -1,0 +1,156 @@
+
+ 
+ 
+ CREATE TABLE MARKS(
+ student_id VARCHAR(10),
+ CouId VARCHAR(10),
+ CouName VARCHAR (50),
+ quiz_1 INT(4),
+ quiz_2 INT(4),
+ quiz_3 INT(4),
+ inclass_assignment INT(4) DEFAULT 0,
+ mid_practical INT(4) DEFAULT 0,
+ mid_theory INT(4) DEFAULT 0,
+ final_theory INT(4) DEFAULT 0,
+ final_practical INT(4) DEFAULT 0,
+ PRIMARY KEY(student_id,course_id)
+ );
+ 
+ 
+ 
+ CREATE TABLE DBMS_Theory_ICT1212_marks(
+ student_id VARCHAR(10) NOT NULL,
+ quiz_1 INT(4) DEFAULT 0,
+ quiz_2 INT(4) DEFAULT 0,
+ quiz_3 INT(4) DEFAULT 0,
+ inclass_assignment INT(4) DEFAULT 0,
+ final_quiz_marks DECIMAL (5,2) DEFAULT 0.00 GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/2*0.10) STORED
+ mid_theory INT(4) DEFAULT 0,
+ group_project DECIMAL(5,2) DEFAULT 0.00,
+ Final_CA_marks DECIMAL(5,2) DEFAULT 0.00 GENERATED ALWAYS AS(mid_theory*0.20+final_quiz_marks) STORED,
+ end_theory INT(4)DEFAULT 0,
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+end_theory*0.70) STORED,
+ PRIMARY KEY(student_id),
+ FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)
+ );
+ 
+ 
+ CREATE TABLE DBMS_Practical_ICT1222_marks(
+ student_id VARCHAR(10) NOT NULL,
+ quiz_1 INT(4) DEFAULT 0,
+ quiz_2 INT(4) DEFAULT 0,
+ quiz_3 INT(4) DEFAULT 0,
+ inclass_assignment INT(4) DEFAULT 0,
+ final_quiz_marks DECIMAL (5,2) DEFAULT 0.00 GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/2*0.10) STORED
+ mid_practical INT(4) DEFAULT 0,
+ group_project DECIMAL(5,2) DEFAULT 0.00,
+ Final_CA_marks DECIMAL(5,2) DEFAULT 0.00 GENERATED ALWAYS AS( mid_practical*0.20+group_project*0.10) STORED,
+ end_practical INT(4)DEFAULT 0,
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+ end_practical*0.70) STORED,
+ PRIMARY KEY(student_id),
+ FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)
+ );
+ 
+ 
+ 
+ CREATE TABLE Sereverside_ICT1233_marks(
+ student_id VARCHAR(10) NOT NULL,
+ quiz_1 INT(4) DEFAULT 0,
+ quiz_2 INT(4) DEFAULT 0,
+ quiz_3 INT(4) DEFAULT 0,
+ tutorial_assignment INT(4) DEFAULT 0,
+ final_quiz_marks DECIMAL (5,2) DEFAULT 0.00 GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/2*0.10) STORED
+ mid_exam INT(4) DEFAULT 0,
+ group_project DECIMAL(5,2) DEFAULT 0.00,
+ Final_CA_marks DECIMAL(5,2) DEFAULT 0	.00 GENERATED ALWAYS AS(mid_exam *0.10+final_quiz_marks+group_project*0.15+tutorial_assignment*0.05) STORED,
+ end_theory INT(4)DEFAULT 0,
+ end_practical INT(4) DEFAULT 0,
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+end_theory*0.40+end_practical*0.20) STORED,
+ PRIMARY KEY(student_id),
+ FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)
+ );
+ 
+ 
+ 
+ CREATE TABLE computer_Archi_ICT1242_marks(
+ student_id VARCHAR(10) NOT NULL,
+ quiz_1 INT(4) DEFAULT 0,
+ quiz_2 INT(4) DEFAULT 0,
+ quiz_3 INT(4) DEFAULT 0,
+ inclass_assignment INT(4) DEFAULT 0,
+ final_quiz_marks DECIMAL (5,2) DEFAULT 0.00 GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/2*0.10) STORED
+ mid_exam INT(4) DEFAULT 0,
+ Final_CA_marks DECIMAL(5,2) DEFAULT 0.00 GENERATED ALWAYS AS(mid_theory*0.20+final_quiz_marks+inclass_assignment*0.10) STORED,
+ end_theory INT(4)DEFAULT 0,
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+end_theory*0.60) STORED,
+ PRIMARY KEY(student_id),
+ FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)
+ );
+ 
+ 
+ CREATE TABLE CompNetwork_ICT1233_marks(
+ student_id VARCHAR(10) NOT NULL,
+ quiz_1 INT(4) DEFAULT 0,
+ quiz_2 INT(4) DEFAULT 0,
+ quiz_3 INT(4) DEFAULT 0,
+ inclass_assignment INT(4) DEFAULT 0,
+ final_quiz_marks DECIMAL (5,2) DEFAULT 0.00 GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/2*0.10) STORED
+ practical_assignment INT(4) DEFAULT 0,
+ Final_CA_marks DECIMAL(5,2) DEFAULT 0	.00 GENERATED ALWAYS AS(inclass_assignment*0.10+final_quiz_marks+practical_assignment*0.10) STORED,
+ end_theory INT(4)DEFAULT 0,
+ end_practical INT(4) DEFAULT 0,
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+((end_theory+end_practical)*0.70)) STORED,
+ PRIMARY KEY(student_id),
+ FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)
+ );
+ 
+ 
+ 
+ CREATE TABLE Descrete_maths_ICT1233_marks(
+ student_id VARCHAR(10) NOT NULL,
+ quiz_1 INT(4) DEFAULT 0,
+ quiz_2 INT(4) DEFAULT 0,
+ quiz_3 INT(4) DEFAULT 0,
+ tutorial_assignment INT(4) DEFAULT 0,
+ final_quiz_marks DECIMAL (5,2) DEFAULT 0.00 GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/2*0.10) STORED
+ mid_exam INT(4) DEFAULT 0,
+ Final_CA_marks DECIMAL(5,2) DEFAULT 0.00 GENERATED ALWAYS AS(mid_exam*0.25+final_quiz_marks+tutorial_assignment*0.05) STORED,
+ end_exam INT(4)DEFAULT 0,
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+end_exam*0.60) STORED,
+ PRIMARY KEY(student_id),
+ FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)
+ );
+ 
+ 
+/** CREATE TABLE English_ICT1222_marks(
+ student_id VARCHAR(10) NOT NULL,
+ quiz_1 INT(4) DEFAULT 0,
+ quiz_2 INT(4) DEFAULT 0,
+ quiz_3 INT(4) DEFAULT 0,
+ tutorial_assignment INT(4) DEFAULT 0,
+ final_quiz_marks DECIMAL (5,2) DEFAULT 0.00 GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/2*0.10) STORED
+ mid_exam INT(4) DEFAULT 0,
+ Final_CA_marks DECIMAL(5,2) DEFAULT 0.00 GENERATED ALWAYS AS(mid_exam*0.25+final_quiz_marks+tutorial_assignment*0.05) STORED,
+ end_exam INT(4)DEFAULT 0,
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+end_exam*0.60) STORED,
+ PRIMARY KEY(student_id),
+ FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)
+ );**//
+ 
+ 
+ 
+ CREATE TABLE Management_ICT1212_marks(
+ student_id VARCHAR(10) NOT NULL,
+ quiz_1 INT(4) DEFAULT 0,
+ quiz_2 INT(4) DEFAULT 0,
+ quiz_3 INT(4) DEFAULT 0,
+ final_quiz_marks DECIMAL (5,2) DEFAULT 0.00 GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/2*0.20) STORED
+ mid_exam INT(4) DEFAULT 0,
+ Final_CA_marks DECIMAL(5,2) DEFAULT 0.00 GENERATED ALWAYS AS(mid_exam*0.20+final_quiz_marks) STORED,
+ end_exam INT(4)DEFAULT 0,
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+end_exam*0.60) STORED,
+ PRIMARY KEY(student_id),
+ FOREIGN KEY(student_id) REFERENCES STUDENT(student_id)
+ );
+
+ ///there some errors
