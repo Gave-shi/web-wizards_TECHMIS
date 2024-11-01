@@ -436,3 +436,66 @@ VALUES
 ('TG1087', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG1087', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG1087', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+
+
+
+DELIMITER //
+
+-- Procedure to Insert Student Grades from DBMS Theory ICT1212
+CREATE PROCEDURE InsertStudentGrades_ICT1212()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE student_id_char CHAR(10);
+    DECLARE final_marks_value DECIMAL(5,2);
+
+    DECLARE student_cursor CURSOR FOR 
+        SELECT student_id, Final_marks FROM DBMS_Theory_ICT1212_marks;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN student_cursor;
+
+    read_loop: LOOP
+        FETCH student_cursor INTO student_id_char, final_marks_value;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+        INSERT INTO Student_grade (student_id, Course_id, Final_marks)
+        VALUES (student_id_char, 'ICT1212', final_marks_value);
+    END LOOP;
+
+    CLOSE student_cursor;
+END //
+
+-- Procedure to Insert Student Grades from Computer Networks ICT1233
+CREATE PROCEDURE InsertStudentGrades_ICT1233()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE student_id_char CHAR(10);
+    DECLARE final_marks_value DECIMAL(5,2);
+
+    DECLARE student_cursor CURSOR FOR 
+        SELECT student_id, Final_marks FROM CompNetwork_ICT1233_marks;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN student_cursor;
+
+    read_loop: LOOP
+        FETCH student_cursor INTO student_id_char, final_marks_value;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+        INSERT INTO Student_grade (student_id, Course_id, Final_marks)
+        VALUES (student_id_char, 'ICT1233', final_marks_value);
+    END LOOP;
+
+    CLOSE student_cursor;
+END //
+
+-- Add additional procedures for other tables similarly...
+
+DELIMITER ;
+
+-- Example calls to each procedure
+CALL InsertStudentGrades_ICT1212();
+CALL InsertStudentGrades_ICT1233();
+-- Add calls to other procedures as needed
