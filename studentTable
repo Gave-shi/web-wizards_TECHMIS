@@ -1,12 +1,12 @@
 CREATE TABLE STUDENT(
- student_id VARCHAR(10) NOT NULL,
+ student_id VARCHAR(15) NOT NULL,
  fname VARCHAR(30),
  lname VARCHAR(30),
  NIC VARCHAR(12),
  email VARCHAR(50),
  gender VARCHAR(10),
  mobile VARCHAR(11),
- batch INT,
+ batchNO INT,
  state_of_student VARCHAR(20),
  PRIMARY KEY(student_id)
  );
