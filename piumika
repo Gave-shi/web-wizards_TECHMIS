@@ -231,7 +231,7 @@ SELECT
 FROM 
     Student_Eligibility
 WHERE 
-    SUBSTRING(student_id, 4, 4) = '2022'; -- Filtering for batch 2022
+    SUBSTRING(student_id, 4, 4) = '2022' -- Filtering for batch 2022
 
 
 
