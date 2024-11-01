@@ -8,9 +8,7 @@ CREATE TABLE MARKS(
     quiz_3 INT DEFAULT 0,
     inclass_assignment INT DEFAULT 0,
     mid_practical INT DEFAULT 0,
-    mid_theory INT DEFAULT 0,                               ('TG/2020/1084','Ameera','Sashimal','200089188285','ameera27sashi@gmail.com','male','0762842539',3,'suspend'),
-                                                             ('TG/2020/1055','Chandima','Rajeew','200124685521','chandimarajeew@gmail.com','male','0784788927',1,'suspend'),
-
+    mid_theory INT DEFAULT 0,                              
     final_theory INT DEFAULT 0,
     final_practical INT DEFAULT 0,
     PRIMARY KEY(student_id, course_id)
