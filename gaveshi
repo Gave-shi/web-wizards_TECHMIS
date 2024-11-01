@@ -8,7 +8,9 @@ CREATE TABLE MARKS(
     quiz_3 INT DEFAULT 0,
     inclass_assignment INT DEFAULT 0,
     mid_practical INT DEFAULT 0,
-    mid_theory INT DEFAULT 0,
+    mid_theory INT DEFAULT 0,                               ('TG/2020/1084','Ameera','Sashimal','200089188285','ameera27sashi@gmail.com','male','0762842539',3,'suspend'),
+                                                             ('TG/2020/1055','Chandima','Rajeew','200124685521','chandimarajeew@gmail.com','male','0784788927',1,'suspend'),
+
     final_theory INT DEFAULT 0,
     final_practical INT DEFAULT 0,
     PRIMARY KEY(student_id, course_id)
@@ -22,12 +24,11 @@ CREATE TABLE DBMS_Theory_ICT1212_marks(
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
     inclass_assignment INT DEFAULT 0,
-    final_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
+    finl_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
     mid_theory INT DEFAULT 0,
-    group_project DECIMAL(5, 2) DEFAULT 0.00,
-    Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_theory * 0.20 + final_quiz_marks) STORED,
+    Finl_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_theory * 0.20 + finl_quiz_marks) STORED,
     end_theory INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_theory * 0.70) STORED,
+    Finl_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Finl_CA_marks + end_theory * 0.70) STORED,
     PRIMARY KEY(student_id,CouId),
     FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
     FOREIGN KEY(CouId) REFERENCES Course(CouId)
@@ -40,13 +41,12 @@ CREATE TABLE DBMS_Practical_ICT1222_marks(
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
-    inclass_assignment INT DEFAULT 0,
-    final_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
-    mid_practical INT DEFAULT 0,
-    group_project DECIMAL(5, 2) DEFAULT 0.00,
-    Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_practical * 0.20 + group_project * 0.10) STORED,
-    end_practical INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_practical * 0.70) STORED,
+    finl_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
+    mid_practicl INT DEFAULT 0,
+    grp_project DECIMAL(5, 2) DEFAULT 0.00,
+    Finl_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_practicl * 0.20 + grp_project * 0.10) STORED,
+    end_practicl INT DEFAULT 0,
+    Finl_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Finl_CA_marks + end_practicl * 0.70) STORED,
     PRIMARY KEY(student_id,CouId),
     FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
     FOREIGN KEY(CouId) REFERENCES Course(CouId)
@@ -59,14 +59,14 @@ CREATE TABLE Serverside_ICT1233_marks(
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
-    tutorial_assignment INT DEFAULT 0,
-    final_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
+    tut_assesment INT DEFAULT 0,
+    finl_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
     mid_exam INT DEFAULT 0,
-    group_project DECIMAL(5, 2) DEFAULT 0.00,
-    Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.10 + final_quiz_marks + group_project * 0.15 + tutorial_assignment * 0.05) STORED,
+    grp_project DECIMAL(5, 2) DEFAULT 0.00,
+    Finl_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.10 + finl_quiz_marks + grp_project * 0.15 + tut_assesment * 0.05) STORED,
     end_theory INT DEFAULT 0,
-    end_practical INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_theory * 0.40 + end_practical * 0.20) STORED,
+    end_practicl INT DEFAULT 0,
+    Finl_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Finl_CA_marks + end_theory * 0.40 +  end_practicl * 0.20) STORED,
     PRIMARY KEY(student_id,CouId),
     FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
     FOREIGN KEY(CouId) REFERENCES Course(CouId)
@@ -80,11 +80,11 @@ CREATE TABLE computer_Archi_ICT1242_marks(
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
     inclass_assignment INT DEFAULT 0,
-    final_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
+    finl_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
     mid_exam INT DEFAULT 0,
-    Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.20 + final_quiz_marks + inclass_assignment * 0.10) STORED,
+    Finl_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.20 + finl_quiz_marks + inclass_assignment * 0.10) STORED,
     end_theory INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_theory * 0.60) STORED,
+    Finl_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Finl_CA_marks + end_theory * 0.60) STORED,
     PRIMARY KEY(student_id,CouId),
     FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
     FOREIGN KEY(CouId) REFERENCES Course(CouId)
@@ -98,12 +98,12 @@ CREATE TABLE CompNetwork_ICT1253_marks(
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
     inclass_assignment INT DEFAULT 0,
-    final_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
-    practical_assignment INT DEFAULT 0,
-    Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (inclass_assignment * 0.10 + final_quiz_marks + practical_assignment * 0.10) STORED,
+    finl_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
+    mid_practicl INT DEFAULT 0,
+    Finl_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (inclass_assignment * 0.10 + finl_quiz_marks + mid_practicl * 0.10) STORED,
     end_theory INT DEFAULT 0,
-    end_practical INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + ((end_theory + end_practical) * 0.70)) STORED,
+    end_practicl INT DEFAULT 0,
+    Finl_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Finl_CA_marks + ((end_theory + end_practicl) * 0.70)) STORED,
     PRIMARY KEY(student_id,CouId),
     FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
     FOREIGN KEY(CouId) REFERENCES Course(CouId)
@@ -116,12 +116,12 @@ CREATE TABLE Discrete_maths_TMS1233_marks(
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
-    tutorial_assignment INT DEFAULT 0,
-    final_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
+    tut_assesment INT DEFAULT 0,
+    finl_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
     mid_exam INT DEFAULT 0,
-    Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.25 + final_quiz_marks + tutorial_assignment * 0.05) STORED,
+    Finl_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.25 + finl_quiz_marks + tut_assesment * 0.05) STORED,
     end_exam INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_exam * 0.60) STORED,
+    Finl_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Finl_CA_marks + end_exam * 0.60) STORED,
     PRIMARY KEY(student_id,CouId),
     FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
     FOREIGN KEY(CouId) REFERENCES Course(CouId)
@@ -134,11 +134,11 @@ CREATE TABLE Management_TCS1212_marks(
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
-    final_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.20) STORED,
+    finl_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.20) STORED,
     mid_exam INT DEFAULT 0,
-    Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.20 + final_quiz_marks) STORED,
+    Finl_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.20 + finl_quiz_marks) STORED,
     end_exam INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_exam * 0.60) STORED,
+    Finl_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Finl_CA_marks + end_exam * 0.60) STORED,
     PRIMARY KEY(student_id,CouId),
     FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
     FOREIGN KEY(CouId) REFERENCES Course(CouId)
@@ -151,12 +151,11 @@ CREATE TABLE English_ENG1222_marks(
  quiz_1 INT DEFAULT 0,
  quiz_2 INT DEFAULT 0,
  quiz_3 INT DEFAULT 0,
- tutorial_assignment INT DEFAULT 0,
- final_quiz_marks DECIMAL (5,2)  GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/ 2 * 0.20) STORED,
+ finl_quiz_marks DECIMAL (5,2)  GENERATED ALWAYS AS (((quiz_1+quiz_2+quiz_3)- LEAST(quiz_1,quiz_2,quiz_3))/ 2 * 0.20) STORED,
  mid_exam INT DEFAULT 0,
- Final_CA_marks DECIMAL(5,2) GENERATED ALWAYS AS(mid_exam*0.20+final_quiz_marks) STORED,
+ Finl_CA_marks DECIMAL(5,2) GENERATED ALWAYS AS(mid_exam*0.20+finl_quiz_marks) STORED,
  end_exam INT DEFAULT 0,
- Final_marks DECIMAL(5,2) GENERATED ALWAYS AS(Final_CA_marks+end_exam*0.60) STORED,
+ Finl_marks DECIMAL(5,2) GENERATED ALWAYS AS(Finl_CA_marks+end_exam*0.60) STORED,
  PRIMARY KEY(student_id,CouId),
  FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
  FOREIGN KEY(CouId) REFERENCES Course(CouId)
@@ -164,26 +163,26 @@ CREATE TABLE English_ENG1222_marks(
 
 
  INSERT INTO DBMS_Theory_ICT1212_marks
- ( student_id,CouId,quiz_1,quiz_2,quiz_3,mid_theory,end_theory,)
+ (student_id, CouId, quiz_1, quiz_2, quiz_3, mid_theory, end_theory)
  VALUES
- ('TG/2022/1310' , 'ICT1212' , 45 , 75 , 85 , 55 , 75),
- ('TG/2022/1587' , 'ICT1212' , 88 , 87 , 80 , 84 , 60),
- ('TG/2022/1343' , 'ICT1212' , 90 , 85 , 94 , 84 , 79),
- ('TG/2022/1388' , 'ICT1212' , 80 , 24 , 55 , 65 , 71),
- ('TG/2022/1453' , 'ICT1212' , 45 , 64, 35 , 57 , 64),
- ('TG/2022/1410' , 'ICT1212' , 90 , 78 , 88 , 75 , 85),
- ('TG/2022/1476' , 'ICT1212' , 88 , 95 , 87 , 85 , 88),
- ('TG/2022/1594' , 'ICT1212' , 95 , 96 , 90 , 88 , 80),
- ('TG/2022/1583' , 'ICT1212' , 88 , 98 , 100 , 87 , 85),
- ('TG/2022/1380' , 'ICT1212' , 78 , 85 , 90 , 94 , 84),
- ('TG/2022/1350' , 'ICT1212' , 75 , 88 , 64 , 82 , 75);
+ ('TG/2022/1310', 'ICT1212', 45, 75, 85, 55, 75),
+ ('TG/2022/1587', 'ICT1212', 88, 87, 80, 84, 60),
+ ('TG/2022/1343', 'ICT1212', 90, 85, 94, 84, 79),
+ ('TG/2022/1388', 'ICT1212', 80, 24, 55, 65, 71),
+ ('TG/2022/1453', 'ICT1212', 45, 64, 35, 57, 64),
+ ('TG/2022/1410', 'ICT1212', 90, 78, 88, 75, 85),
+ ('TG/2022/1476', 'ICT1212', 88, 95, 87, 85, 88),
+ ('TG/2022/1594', 'ICT1212', 95, 96, 90, 88, 80),
+ ('TG/2022/1583', 'ICT1212', 88, 98, 100, 87, 85),
+ ('TG/2022/1380', 'ICT1212', 78, 85, 90, 94, 84),
+ ('TG/2022/1350', 'ICT1212', 75, 88, 64, 82, 75);
 
 
 
 
 
 INSERT INTO DBMS_Practical_ICT1222_marks
-(student_id, CouId, mid_practical, group_project, end_practical)
+(student_id, CouId, mid_practicl, grp_project, end_practicl)
 VALUES
  ('TG/2022/1310', 'ICT1222', 88, 75, 65),
  ('TG/2022/1587', 'ICT1222', 78, 64, 55),
@@ -201,8 +200,9 @@ VALUES
 
 
 
+
 INSERT INTO Serverside_ICT1233_marks
-(student_id ,CouId,quiz_1,quiz_2,quiz_3,tutorial_assignment,mid_exam,group_project,end_theory,end_practical)
+(student_id ,CouId,quiz_1,quiz_2,quiz_3,tut_assesment,mid_exam,grp_project,end_theory,end_practicl)
 VALUES
  ('TG/2022/1310', 'ICT1233', 75, 88, 94, 75, 75, 80, 75, 65),
  ('TG/2022/1587', 'ICT1233', 88, 85, 90, 67, 84, 75, 65, 75),
@@ -238,7 +238,7 @@ VALUES
 
 
 INSERT INTO CompNetwork_ICT1253_marks
-(student_id,CouId,quiz_1,quiz_2,quiz_3,inclass_assignment,practical_assignment,end_theory,end_practical)
+(student_id,CouId,quiz_1,quiz_2,quiz_3,inclass_assignment,mid_practicl,end_theory,end_practicl)
 VALUES
  ('TG/2022/1310', 'ICT1253', 90, 95, 98, 85, 75, 75, 80),
  ('TG/2022/1587', 'ICT1253', 87, 85, 95, 75, 55, 50, 80),
@@ -255,7 +255,7 @@ VALUES
 
 
 INSERT INTO  Discrete_maths_TMS1233_marks
-(student_id,CouId,quiz_1,quiz_2,quiz_3,tutorial_assignment,mid_exam,end_exam)
+(student_id,CouId,quiz_1,quiz_2,quiz_3,tut_assesment,mid_exam,end_exam)
 VALUES
  ('TG/2022/1310', 'TMS1233', 90, 98, 80, 85, 80, 75),
  ('TG/2022/1587', 'TMS1233', 95, 54, 25, 82, 76, 65),
@@ -317,114 +317,350 @@ VALUES
 
 ----------------------------------------------Marks Related requirements----------------------------------------------------
 
- ------------------(01)/*CREATE VIEW to get whole batch CA Summary using course code*/--------------------------
- CREATE VIEW  CA_Summary_of_Whole_Batch
- SELECT 
- MARKS.student_id,
- MARKS.CouId,
- MARKS.quiz_1,
- MARKS.quiz_2,
- MARKS.quiz_3,
- MARKS.Final_CA_marks,
- COUNT (MARKS.student_id) AS Total Students of the batch,
- MARKS.CouName,
- AVG (MARKS.Final_CA_marks) AS Average_marks_of_the_Batch,
- MIN (MARKS.Final_CA_marks) AS Minimum_marks_of_the_Batch,
- MAX (MARKS.Final_CA_marks) AS Maximum_marks_of_the_Batch,
- FROM MARKS
- INNER JOIN STUDENT ON STUDENT.student_id=MARKS.student_id
 
- GROUP BY CouId;
-
-
-
- -------------------------(01)/*CREATE PROCEDURE TO get CA summary by giving course code*/---------------------------
-
-DELIMITER //
- CREATE PROCEDURE get_CA_by_course_Code (IN CourseId VARCHAR (10))
- BEGIN
-  SELECT 
-    COUNT(student_id) AS Total_students_of_the_batch,
-    CouId,
-    MIN(Final_CA_marks) AS Min_mark_of_the_Batch,
-    MAX(Final_CA_marks) AS Max_mark_of_the_Batch,
-   FROM MARKS 
-   WHERE CouId = CourseId ;
- END //
-
-DELIMITER ;
--------------CALL to procedure---------------------------------------------------------------
- CALL get_CA_by_course_Code ('ICT1212');
-
-
-
-
-
-
-
-
-----------------------(02)--/*As individuals GET  CA Summary using 
-/* By giving course code and registration no */ --------------------------------------
-CREATE PROCEDURE get_CA_as_induviduals (IN CourseId VARCHAR(10), IN stud_id VARCHAR(10))
+------There should be a way to view CA marks details
+------------------------o As a summary for whole batch  By giving course code --------------------------------------------
+CREATE PROCEDURE get_CA_Summary_by_course_Code (IN CouId VARCHAR (10))
 BEGIN
- SELECT
-  student_id,
-  CouId,
-  quiz_1,
-  quiz_2,
-  quiz_3,
-  Final_CA_marks,
- FROM MARKS
- WHERE CourseId = CouId AND stud_id = student_id;
-END // 
+    CASE CouId
+        WHEN 'ICT1212' THEN 
+            SELECT
+            COUNT(student_id) AS Total_students_of_The_Batch,
+            AVG(Finl_CA_marks) AS Average_of_the_batch,
+            MAX(Finl_CA_marks) AS Maximum_of_the_Batch,
+            MIN(Finl_CA_marks) AS Minimum_of_the_Batch
+              FROM DBMS_Theory_ICT1212_marks WHERE student_id = student_id;
+        WHEN 'ICT1222' THEN 
+            SELECT 
+            COUNT(student_id) AS Total_students_of_The_Batch,
+            AVG(Finl_CA_marks) AS Average_of_the_batch,
+            MAX(Finl_CA_marks) AS Maximum_of_the_Batch,
+            MIN(Finl_CA_marks) AS Minimum_of_the_Batch
+              FROM DBMS_Practical_ICT1222_marks WHERE student_id = student_id;
+        WHEN 'ICT1233' THEN 
+            SELECT 
+            COUNT(student_id) AS Total_students_of_The_Batch,
+            AVG(Finl_CA_marks) AS Average_of_the_batch,
+            MAX(Finl_CA_marks) AS Maximum_of_the_Batch,
+            MIN(Finl_CA_marks) AS Minimum_of_the_Batch
+             FROM Serverside_ICT1233_marks WHERE student_id = student_id;
+        WHEN 'ICT1242' THEN 
+            SELECT
+            COUNT(student_id) AS Total_students_of_The_Batch,
+            AVG(Finl_CA_marks) AS Average_of_the_batch,
+            MAX(Finl_CA_marks) AS Maximum_of_the_Batch,
+            MIN(Finl_CA_marks) AS Minimum_of_the_Batch 
+             FROM computer_Archi_ICT1242_marks WHERE student_id = student_id;
+        WHEN 'ICT1253' THEN 
+            SELECT
+            COUNT(student_id) AS Total_students_of_The_Batch,
+            AVG(Finl_CA_marks) AS Average_of_the_batch,
+            MAX(Finl_CA_marks) AS Maximum_of_the_Batch,
+            MIN(Finl_CA_marks) AS Minimum_of_the_Batch 
+             FROM CompNetwork_ICT1253_marks WHERE student_id = student_id;
+        WHEN 'TMS1233' THEN 
+            SELECT
+            COUNT(student_id) AS Total_students_of_The_Batch,
+            AVG(Finl_CA_marks) AS Average_of_the_batch,
+            MAX(Finl_CA_marks) AS Maximum_of_the_Batch,
+            MIN(Finl_CA_marks) AS Minimum_of_the_Batch 
+             FROM Discrete_maths_TMS1233_marks WHERE student_id = student_id;
+        WHEN 'TCS1212' THEN 
+            SELECT 
+            COUNT(student_id) AS Total_students_of_The_Batch,
+            AVG(Finl_CA_marks) AS Average_of_the_batch,
+            MAX(Finl_CA_marks) AS Maximum_of_the_Batch,
+            MIN(Finl_CA_marks) AS Minimum_of_the_Batch
+             FROM Management_TCS1212_marks WHERE student_id = student_id;
+        WHEN 'ENG1222'THEN 
+            SELECT
+            COUNT(student_id) AS Total_students_of_The_Batch,
+            AVG(Finl_CA_marks) AS Average_of_the_batch,
+            MAX(Finl_CA_marks) AS Maximum_of_the_Batch,
+            MIN(Finl_CA_marks) AS Minimum_of_the_Batch 
+             FROM English_ENG1222_marks WHERE student_id = student_id;
+        ELSE 
+            SELECT 'Invalid course code' AS error;
+    END CASE;
+END //
 
-DELIMITER ;
--------------CALL to procedure--------------------------------------------------------------
-CALL get_CA_as_induviduals ('ÍCT1222','TG/2022/1401');
-
-
-
-
-
-
-
-
-
-
--------------------------(03)---------/* AS Induvidulas by giving Reg_NO get all course's CA marks as summary*/------------------
-
-CREATE PROCEDURE get_CA_marks_of_all_courses (IN stud_ID VARCHAR(10))
+----------------There should be a way to view CA marks details-------------------------------------------
+-------------------------As individuals get CA_marks --------------------------
+-----------------▪ By giving course code and registration no--------------------------------------------------------
+CREATE PROCEDURE get_CA_as_induviduals_by_course_Code_and_RegNO (IN CouId VARCHAR (10), IN stud_id VARCHAR(15))
 BEGIN
-  SELECT 
-    student_id,
-    CouId,
-    quiz_1,
-    quiz_2,
-    quiz_3,
-    Final_CA_marks,
-  FROM MARKS
-  WHERE student_id = stud_ID ;
-END // 
+    CASE CouId
+        WHEN 'ICT1212' THEN 
+            SELECT DISTINCT
+            student_id,
+            CouId,
+            quiz_1,
+            quiz_2,
+            quiz_3,
+            Finl_CA_marks
+              FROM DBMS_Theory_ICT1212_marks 
+              WHERE stud_id = student_id;
+        WHEN 'ICT1222' THEN 
+            SELECT DISTINCT
+            student_id,
+            CouId,
+            quiz_1,
+            quiz_2,
+            quiz_3,
+            Finl_CA_marks
+              FROM DBMS_Practical_ICT1222_marks
+              WHERE stud_id = student_id;
+        WHEN 'ICT1233' THEN 
+            SELECT  
+            student_id,
+            CouId,
+            quiz_1,
+            quiz_2,
+            quiz_3,
+            Finl_CA_marks
+             FROM Serverside_ICT1233_marks 
+             WHERE stud_id = student_id;
+        WHEN 'ICT1242' THEN 
+            SELECT DISTINCT
+            student_id,
+            CouId,
+            quiz_1,
+            quiz_2,
+            quiz_3,
+            Finl_CA_marks
+             FROM computer_Archi_ICT1242_marks 
+             WHERE stud_id = student_id;
+        WHEN 'ICT1253' THEN 
+            SELECT DISTINCT
+            student_id,
+            CouId,
+            quiz_1,
+            quiz_2,
+            quiz_3,
+            Finl_CA_marks
+             FROM CompNetwork_ICT1253_marks 
+             WHERE stud_id = student_id;
+        WHEN 'TMS1233' THEN 
+            SELECT DISTINCT
+            student_id,
+            CouId,
+            quiz_1,
+            quiz_2,
+            quiz_3,
+            Finl_CA_marks
+             FROM Discrete_maths_TMS1233_marks 
+             WHERE stud_id = student_id;
+        WHEN 'TCS1212' THEN 
+            SELECT DISTINCT
+            student_id,
+            CouId,
+            quiz_1,
+            quiz_2,
+            quiz_3,
+            Finl_CA_marks
+             FROM Management_TCS1212_marks
+             WHERE stud_id = student_id;
+        WHEN 'ENG1222'THEN 
+            SELECT  DISTINCT
+            student_id,
+            CouId,
+            quiz_1,
+            quiz_2,
+            quiz_3,
+            Finl_CA_marks
+              FROM English_ENG1222_marks 
+              WHERE stud_id = student_id;
+        ELSE 
+            SELECT 'Invalid course code' AS error;
+    END CASE;
+END //
 
-DELIMITER ;
--------------CALL to procedure---------------------------------------------------------------
- CALL get_CA_marks_of_all_courses('TG/2022/1401');
+ 
+    
+
+ -------------------by giving student_id get all CA MARKS from all courses ---------------------------------------
+CREATE PROCEDURE get_all_courses_CA_marks_by_student_id (IN stud_id VARCHAR(15))
+BEGIN
+    SELECT DISTINCT
+        'ICT1212' AS CouId,
+        quiz_1,
+        quiz_2,
+        quiz_3,
+        Finl_CA_marks
+    FROM DBMS_Theory_ICT1212_marks 
+    WHERE student_id = stud_id
+    
+    UNION ALL
+    
+    SELECT DISTINCT
+        'ICT1222' AS CouId,
+        quiz_1,
+        quiz_2,
+        quiz_3,
+        Finl_CA_marks
+    FROM DBMS_Practical_ICT1222_marks 
+    WHERE student_id = stud_id
+
+    UNION ALL
+    
+    SELECT DISTINCT
+        'ICT1233' AS CouId,
+        quiz_1,
+        quiz_2,
+        quiz_3,
+        Finl_CA_marks
+    FROM Serverside_ICT1233_marks  
+    WHERE student_id = stud_id 
+
+    UNION ALL
+    
+    SELECT DISTINCT
+        'ICT1242' AS CouId,
+        quiz_1,
+        quiz_2,
+        quiz_3,
+        Finl_CA_marks
+    FROM computer_Archi_ICT1242_marks 
+    WHERE student_id = stud_id
+
+    UNION ALL
+    
+    SELECT DISTINCT
+        'ICT1253' AS CouId,
+        quiz_1,
+        quiz_2,
+        quiz_3,
+        Finl_CA_marks
+    FROM CompNetwork_ICT1253_marks 
+    WHERE student_id = stud_id
+
+    UNION ALL
+    
+    SELECT DISTINCT
+        'TMS1233' AS CouId,
+        quiz_1,
+        quiz_2,
+        quiz_3,
+        Finl_CA_marks
+    FROM Discrete_maths_TMS1233_marks 
+    WHERE student_id = stud_id
+
+    UNION ALL
+    
+    SELECT DISTINCT
+        'TCS1212' AS CouId,
+        quiz_1,
+        quiz_2,
+        quiz_3,
+        Finl_CA_marks
+    FROM Management_TCS1212_marks
+    WHERE student_id = stud_id
+
+    UNION ALL
+    
+    SELECT DISTINCT
+        'ENG1222' AS CouId,
+        quiz_1,
+        quiz_2,
+        quiz_3,
+        Finl_CA_marks
+    FROM English_ENG1222_marks 
+    WHERE student_id = stud_id;
+
+END //
+
+------------------all marks only for individuals and whole batch ---------------------------------------------------------------
+----------(From this by giving course code whole batch marks displayed and
+-------------------- induvidual one also in whole batch their particular marks also displayed)-----------------
+CREATE PROCEDURE get_CA_by_course_Code_as_induvidjal_and_batch (IN CouId VARCHAR (10))
+BEGIN
+    CASE CouId
+        WHEN 'ICT1212' THEN 
+            SELECT * FROM DBMS_Theory_ICT1212_marks WHERE student_id = student_id;
+        WHEN 'ICT1222' THEN 
+            SELECT * FROM DBMS_Practical_ICT1222_marks WHERE student_id = student_id;
+        WHEN 'ICT1233' THEN 
+            SELECT * FROM Serverside_ICT1233_marks WHERE student_id = student_id;
+        WHEN 'ICT1242' THEN 
+            SELECT * FROM computer_Archi_ICT1242_marks WHERE student_id = student_id;
+        WHEN 'ICT1253' THEN 
+            SELECT * FROM CompNetwork_ICT1253_marks WHERE student_id = student_id;
+        WHEN 'TMS1233' THEN 
+            SELECT * FROM Discrete_maths_TMS1233_marks WHERE student_id = student_id;
+        WHEN 'TCS1212' THEN 
+            SELECT * FROM Management_TCS1212_marks WHERE student_id = student_id;
+        WHEN 'ENG1222'THEN 
+            SELECT * FROM English_ENG1222_marks WHERE student_id = student_id;
+        ELSE 
+            SELECT 'Invalid course code' AS error;
+    END CASE;
+END //
 
 
- ----------------There should be a way to see the final marks only for individuals and whole batch------------------------
-CREATE VIEW  CA_Summary_of_Whole_Batch
- SELECT 
- MARKS.student_id,
- MARKS.CouId,
- MARKS.quiz_1,
- MARKS.quiz_2,
- MARKS.quiz_3,
- MARKS.Final_CA_marks,
- COUNT (MARKS.student_id) AS Total Students of the batch,
- MARKS.CouName,
- AVG (MARKS.Final_CA_marks) AS Average_marks_of_the_Batch,
- MIN (MARKS.Final_CA_marks) AS Minimum_marks_of_the_Batch,
- MAX (MARKS.Final_CA_marks) AS Maximum_marks_of_the_Batch,
- FROM MARKS
- INNER JOIN STUDENT ON STUDENT.student_id=MARKS.student_id
- GROUP BY CouId;
+----------------There should be a way to see the final marks only for individuals and whole batch-------------------------
+----------------------------getting final marks only for individuals and whole batch ----------------------
+CREATE PROCEDURE get_Finl_marks_by_course_Code_as_individuals_and_batch (IN CouId VARCHAR (10))
+BEGIN
+    CASE CouId
+        WHEN 'ICT1212' THEN 
+            SELECT student_id,CouId,Finl_marks FROM DBMS_Theory_ICT1212_marks WHERE student_id = student_id;
+        WHEN 'ICT1222' THEN 
+            SELECT  student_id,CouId,Finl_marks FROM DBMS_Practical_ICT1222_marks WHERE student_id = student_id;
+        WHEN 'ICT1233' THEN 
+            SELECT  student_id,CouId,Finl_marks FROM Serverside_ICT1233_marks WHERE student_id = student_id;
+        WHEN 'ICT1242' THEN 
+            SELECT  student_id,CouId,Finl_marks FROM computer_Archi_ICT1242_marks WHERE student_id = student_id;
+        WHEN 'ICT1253' THEN 
+            SELECT  student_id,CouId,Finl_marks FROM CompNetwork_ICT1253_marks WHERE student_id = student_id;
+        WHEN 'TMS1233' THEN 
+            SELECT  student_id,CouId,Finl_marks FROM Discrete_maths_TMS1233_marks WHERE student_id = student_id;
+        WHEN 'TCS1212' THEN 
+            SELECT  student_id,CouId,Finl_marks FROM Management_TCS1212_marks WHERE student_id = student_id;
+        WHEN 'ENG1222'THEN 
+            SELECT  student_id,CouId,Finl_marks FROM English_ENG1222_marks WHERE student_id = student_id;
+        ELSE 
+            SELECT 'Invalid course code' AS error;
+    END CASE;
+END //
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-----------------There should be a way to see marks for each subject, student and as a whole batch------------------
+
+CREATE PROCEDURE get_all_marks_of_all_courses()
+BEGIN
+   SELECT 'ICT1212' AS CouId, student_id, CouId, quiz_1, quiz_2, quiz_3, Finl_CA_marks, Finl_marks  
+   FROM DBMS_Theory_ICT1212_marks
+   UNION ALL
+   
+   SELECT 'ICT1222' AS CouId, student_id, CouId, quiz_1, quiz_2, quiz_3, Finl_CA_marks, Finl_marks 
+   FROM DBMS_Practical_ICT1222_marks
+   UNION ALL
+
+   SELECT 'ICT1233' AS CouId, student_id, CouId, quiz_1, quiz_2, quiz_3, Finl_CA_marks, Finl_marks 
+   FROM Serverside_ICT1233_marks
+   UNION ALL
+
+   SELECT 'ICT1242' AS CouId,  student_id, CouId, quiz_1, quiz_2, quiz_3, Finl_CA_marks, Finl_marks
+   FROM computer_Archi_ICT1242_marks
+   UNION ALL
+
+   SELECT 'ICT1253' AS CouId,  student_id, CouId, quiz_1, quiz_2, quiz_3, Finl_CA_marks, Finl_marks
+   FROM CompNetwork_ICT1253_marks
+   UNION ALL
+
+   SELECT 'TMS1233' AS CouId,  student_id, CouId, quiz_1, quiz_2, quiz_3, Finl_CA_marks, Finl_marks
+   FROM Discrete_maths_TMS1233_marks
+   UNION ALL
+
+   SELECT 'TCS1212' AS CouId,  student_id, CouId, quiz_1, quiz_2, quiz_3, Finl_CA_marks, Finl_marks
+   FROM Management_TCS1212_marks 
+   UNION ALL
+
+   SELECT 'ENG1222' AS CouId,  student_id, CouId, quiz_1, quiz_2, quiz_3, Finl_CA_marks, Finl_marks 
+   FROM English_ENG1222_marks;
+END //
+
+
+
+
