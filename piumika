@@ -47,13 +47,9 @@ VALUES
 ('ICT1233','Server-Side Web Development',3,30,'Both'),
 ('ICT1242','Computer Architecture',2,15,'Theory'),
 ('ICT1253','Computer Networks',3,30,'Both'),
-('TMS1233','Discrete Mathematics',3,15,'Theory'),
+('TMS1223','Discrete Mathematics',3,15,'Theory'),
 ('ENG1222','English II',2,15,'Theory'),
 ('TCS1212','Fundamentals of Management',2,15,'Theory');
-
-DAGCAHAJHHAV
-
-
 
 
 
