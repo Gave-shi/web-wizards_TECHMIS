@@ -2,7 +2,7 @@ CREATE TABLE STUDENT(
  student_id VARCHAR(10) NOT NULL,
  fname VARCHAR(30),
  lname VARCHAR(30),
- NIC INT(12),
+ NIC VARCHAR(20),
  email VARCHAR(50),
  gender VARCHAR(10),
  mobile INT(11),
@@ -15,23 +15,23 @@ CREATE TABLE STUDENT(
 /*STUDENT TABLE CREATING AND INSERTING DATA */
 
 INSERT INTO STUDENT
-(student_id,fname,lname,NIC,email,gender,mobile,batchNO, state_of_student)
+(student_id,fname,lname,NIC,email,gender,mobile,batch, state_of_student)
 VALUES
- ('TG/2022/1310','Pasidu','Bhathiya',200225481258,'pasidu20@gmail.com','male',0712348658,1,'proper'),
- ('TG/2022/1587','Vinul','Ranasinghe',200285471235,'vinulranasinghe@gmail.com','male',0754824135,1,'proper'),
- ('TG/2022/1343','Piumkia','Fernando',200255901801,'psfdo22@gmail.com','female',0711274511,1,'proper'),
- ('TG/2022/1388','Dedunu','Divynjali',200254001101,'dedunu25@gmail.com','female',0778445115,1,'proper'),
- ('TG/2021/1125','Anuhas','lakmal',200148958752,'anuhaslakmal@gmail.com','male',0781768712,2,'repeat'),
- ('TG/2022/1453','Dulakshi','Madushani',200288590548,'dula85kshi@gmail.com','female',0762584629,1,'proper'),
- ('TG/2000/1042','Nimesh','Prabathiya',200084780181,'nime48sh@gmail.com','male',0766581274,3,'repeat'),
- ('TG/2021/1245','Yenul','Gayantha',200187006799,'yenulgayantha@gmail.com','male',0769873205,2,'repeat'),
- ('TG/2022/1410','Lalithya ','Rasingolla',200279086233,'la84rasin@gmail.com','female',0767262742,1,'proper'),
- ('TG/2021/1025','Vishali','Sadunika',200064121487,'vishalisadunika@gmail.com','female',0706350258,2,'repeat'),
- ('TG/2022/1476','Premakaran','Ashwar',200287341136,'pema58ash@gmail.com','male',0779711035,1,'proper'),
- ('TG/2022/1594','Thenu','Botheju',200288051801,'thenubotheju@gmail.com','female',0785650948,1,'proper'),
- ('TG/2022/1583','Kanishka','Gimhana',200280901481,'kanishkagimhana@gmail.com','male',0743031511,1,'proper'),
- ('TG/2021/1087','Sasidu','Sashindra',200198249401,'sa43sidu@gmail.com','male',0754215291,2,'repeat'),
- ('TG/2022/1380','Vihanga','Manusha',200265135988,'vihangamanusha@gmail.com','male',0773497292,1,'proper'),
- ('TG/2020/1055','Lakmini','Senarathna',200088995422,'lakbslsenarathna@gmail.com','female',0782165213,1,'repeat'),
- ('TG/2022/1350','Madawa','Jayaweera',200269549725,'msjayaweera@gmail.com','male',0770064130,1,'proper');
+ ('TG1310','Pasidu','Bhathiya','200225481258','pasidu20@gmail.com','male',0712348658,1,'proper'),
+ ('TG1587','Vinul','Ranasinghe','200285471235','vinulranasinghe@gmail.com','male',0754824135,1,'proper'),
+ ('TG1343','Piumkia','Fernando','200255901801','psfdo22@gmail.com','female',0711274511,1,'proper'),
+ ('TG1388','Dedunu','Divynjali','200254001101','dedunu25@gmail.com','female',0778445115,1,'proper'),
+ ('TG1125','Anuhas','lakmal','200148958752','anuhaslakmal@gmail.com','male',0781768712,2,'repeat'),
+ ('TG1453','Dulakshi','Madushani','200288590548','dula85kshi@gmail.com','female',0762584629,1,'proper'),
+ ('TG1042','Nimesh','Prabathiya','200084780181','nime48sh@gmail.com','male',0766581274,3,'repeat'),
+ ('TG1245','Yenul','Gayantha','200187006799','yenulgayantha@gmail.com','male',0769873205,2,'repeat'),
+ ('TG1410','Lalithya ','Rasingolla','200279086233','la84rasin@gmail.com','female',0767262742,1,'proper'),
+ ('TG1025','Vishali','Sadunika','200064121487','vishalisadunika@gmail.com','female',0706350258,2,'repeat'),
+ ('TG1476','Premakaran','Ashwar','200287341136','pema58ash@gmail.com','male',0779711035,1,'proper'),
+ ('TG1594','Thenu','Botheju','200288051801','thenubotheju@gmail.com','female',0785650948,1,'proper'),
+ ('TG1583','Kanishka','Gimhana','200280901481','kanishkagimhana@gmail.com','male',0743031511,1,'proper'),
+ ('TG1087','Sasidu','Sashindra','200198249401','sa43sidu@gmail.com','male',0754215291,2,'repeat'),
+ ('TG1380','Vihanga','Manusha','200265135988','vihangamanusha@gmail.com','male',0773497292,1,'proper'),
+ ('TG1055','Lakmini','Senarathna','200088995422','lakbslsenarathna@gmail.com','female',0782165213,1,'repeat'),
+ ('TG1350','Madawa','Jayaweera','200269549725','msjayaweera@gmail.com','male',0770064130,1,'proper');
  
