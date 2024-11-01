@@ -12,7 +12,7 @@ CREATE TABLE STUDENT(
  );
  
 
-/*STUDENT TABLE CREATING */
+/*STUDENT TABLE CREATING AND INSERTING DATA */
 
 INSERT INTO STUDENT
 (student_id,fname,lname,NIC,email,gender,mobile,batchNO, state_of_student)
