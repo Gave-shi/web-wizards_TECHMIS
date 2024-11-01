@@ -36,20 +36,12 @@ CREATE TABLE DBMS_Theory_ICT1212_marks(
 -- DBMS Practical Table
 CREATE TABLE DBMS_Practical_ICT1222_marks(
     student_id VARCHAR(10) NOT NULL,
-    CouId VARCHAR (10),
-    quiz_1 INT DEFAULT 0,
-    quiz_2 INT DEFAULT 0,
-    quiz_3 INT DEFAULT 0,
-    inclass_assignment INT DEFAULT 0,
-    final_quiz_marks DECIMAL(5, 2) GENERATED ALWAYS AS (((quiz_1 + quiz_2 + quiz_3) - LEAST(quiz_1, quiz_2, quiz_3)) / 2 * 0.10) STORED,
+
     mid_practical INT DEFAULT 0,
     group_project DECIMAL(5, 2) DEFAULT 0.00,
     Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_practical * 0.20 + group_project * 0.10) STORED,
     end_practical INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_practical * 0.70) STORED,
-    PRIMARY KEY(student_id,CouId),
-    FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
-    FOREIGN KEY(CouId) REFERENCES Course(CouId)
+
 );
 
 -- Server-side Development Table

@@ -1,0 +1,57 @@
+CREATE TABLE Lecture(
+LecId VARCHAR(4) NOT NULL,
+LecName VARCHAR(100),
+LecEmail VARCHAR(50),
+LecContact VARCHAR(15) ,
+LecPosition VARCHAR(60),
+PRIMARY KEY (LecId)
+);
+
+
+CREATE TABLE Course(
+CouId VARCHAR (10) NOT NULL,
+CouName VARCHAR (50),
+CouCredit INT,
+CrediT INT,
+CourType VARCHAR (30),
+PRIMARY KEY(CouId));
+
+INSERT INTO Lecture
+VALUES
+('L001','Prof. P.K.S.C Jayasinghe','subash@ictec.ruh.ac.lk','0711234567','Senior Lecturer'),
+('LOO2','Mr. P.H.P.N Laksiri','phpnlaksiri@ictec.ruh.ac.lk','0711234567','Lecturer'),
+('L003','Ms. Rumeshika W. arachi','rumeshika@ictec.ruh.ac.lk','0711234567','Lecturer(Probationary)'),
+('L004','Ms. Malsha Prabuddhi','malsha@ictec.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L005','Ms. Chanduni Gamage','chanduni@ictec.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L006','Ms. E.H.M.P.M. Wijerathna','piyumi@ictec.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L007','Ms. R.D.N. Shakya','shakya@ictec.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L008','Ms. Akila Brahmana','akila@ictec.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L009','Mr. A.W.A.T. Dilhan','dilhan@ictec.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L010','Mr. Shashitha Lakal','shashithal@ictec.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L011','Dr. Thissa Karunarathna','thissa@btec.ruh.ac.lk','0711234567','Senior Lecturer'),
+('L012','Professor E.P.S. Chandana','epschandana@btec.ruh.ac.lk','0775909665','Deputy Vice Chancellor,University of Ruhuna'),
+('L013','Dr. K.M.W Rajawaththa','wathsala@btec.ruh.ac.lk','0711234567','Senior Lecturer'),
+('L014','Dr. Niranjan Kannangara','niranjan@btec.ruh.ac.lk','0711234567','Lecturer (Unconfirmed)'),
+('L015','Dr. K.G.S.Harshadewa Gunawardana','harshadewa@etec.ruh.ac.lk','0711234567','Senior Lecturer'),
+('L016','Ms.B.H.C. Sanjeewani Thilakarathna','sanjeewani@fot.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L017','Eng. Ms. J.W. Achini','achini@etec.ruh.ac.lk','0711234567','Lecturer (Probationary)'),
+('L018','Eng Mr. H.V.H.H.Senavirathna','Eng Mr. H.V.H.H.Senavirathna','0711234567','Lecturer (Probationary)');
+
+
+INSERT INTO Course
+VALUES
+('ICT1212','Database Management Systems',2,'Theory'),
+('ICT1222','Database Management Systems Practicum',2,'Practical'),
+('ICT1233','Server-Side Web Development',3,'Both'),
+('ICT1242','Computer Architecture',2,'Theory'),
+('ICT1253','Computer Networks',3,'Both'),
+('TMS1233','Discrete Mathematics',3,'Theory'),
+('ENG1222','English II',2,'Theory'),
+('TCS1212','Fundamentals of Management',2,'Theory');
+
+
+
+
+
+
+
