@@ -2,10 +2,10 @@ CREATE TABLE STUDENT(
  student_id VARCHAR(10) NOT NULL,
  fname VARCHAR(30),
  lname VARCHAR(30),
- NIC INT(12),
+ NIC VARCHAR(12),
  email VARCHAR(50),
  gender VARCHAR(10),
- mobile INT(11),
+ mobile VARCHAR(11),
  batch INT(2),
  state_of_student VARCHAR(20),
  PRIMARY KEY(student_id)
