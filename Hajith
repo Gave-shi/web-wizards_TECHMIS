@@ -69,87 +69,7 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     INSERT INTO eng1222_course_marks (student_id, quiz_1, quiz_2, quiz_3,mid_exam_marks,end_exam_marks) VALUES
     ('TG1021', 58.00, 40.00, 89.00, 90.00, 85.00);
 
-INSERT INTO Student_Attandance (Stu_reg_num, Course_Id, week_01, week_02, week_03, week_04, week_05, week_06, week_07, week_08, week_09, week_10, week_11, week_12, week_13, week_14, week_15) VALUES
-('TG1021', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1021', 'ENG1222', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', 'MC', '1', 'AB', '1', '1', '1'),
-('TG1021', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1021', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1021', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1021', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1021', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1021', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1031', 'ENG1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1031', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1031', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1031', 'ICT1233', '1', '1', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', 'AB', '1'),
-('TG1031', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1031', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1031', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1031', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1'),
-('TG1032', 'ENG1222', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1032', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1032', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1032', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1032', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1032', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1032', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1032', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1045', 'ENG1222', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1'),
-('TG1045', 'ICT1212', '1', 'MC', '1', '1', 'AB', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1045', 'ICT1222', '1', 'MC', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1045', 'ICT1233', '1', 'MC', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1045', 'ICT1242', '1', 'MC', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1045', 'ICT1253', '1', 'MC', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', '1'),
-('TG1045', 'TCS1212', '1', 'MC', '1', '1', '1', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1'),
-('TG1045', 'TMS1233', '1', 'MC', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1'),
-('TG1047', 'ENG1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1047', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1047', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1047', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1047', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1047', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1047', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1047', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ENG1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1062', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1062', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1064', 'ENG1222', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1064', 'ICT1212', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1064', 'ICT1222', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1064', 'ICT1233', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1064', 'ICT1242', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1064', 'ICT1253', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1064', 'TCS1212', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1064', 'TMS1233', '1', '1', 'MC', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1067', 'ENG1222', '1', '1', 'AB', '1', '1', 'AB', '1', 'AB', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1067', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1067', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1067', 'ICT1233', '1', '1', 'AB', '1', 'AB', 'AB', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1067', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1067', 'ICT1253', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1067', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1067', 'TMS1233', '1', '1', 'AB', '1', 'AB', '1', '1', '1', '1', 'AB', '1', '1', 'AB', '1', 'MC'),
-('TG1084', 'ENG1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1084', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1084', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1084', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1084', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1084', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1084', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1084', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'AB', '1', '1'),
-('TG1087', 'ENG1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1087', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1087', 'ICT1222', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1087', 'ICT1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1087', 'ICT1242', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1087', 'ICT1253', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1087', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
-('TG1087', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
+
 
 CREATE DATABASE SIMS;
 
@@ -218,23 +138,7 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     final_marks decimal(5,2) GENERATED ALWAYS AS (final_quiz_marks +mid_exam_marks * 0.25 + end_exam_marks * 0.60) STORED
     );
 
-    INSERT INTO eng1222_course_marks (student_id, quiz_1, quiz_2, quiz_3,mid_exam_marks,end_exam_marks) VALUES
-    ('TG1022', 58.00, 40.00, 89.00, 90.00, 85.00),
-    ('TG1023', 58.00, 40.00, 89.00, 90.00, 85.00),
-    ('TG1024', 58.00, 40.00, 89.00, 90.00, 85.00),
-    ('TG1025', 58.00, 40.00, 89.00, 90.00, 85.00),
-    ('TG1026', 58.00, 40.00, 89.00, 90.00, 85.00);
-	
-
-
-
-
-
-
-
-
-
-    
+ 
 	CREATE TABLE Student_grade (
     student_id CHAR(10) NOT NULL,
     Course_id CHAR(7) NOT NULL,
@@ -254,16 +158,24 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
             WHEN Final_marks >= 45 THEN 'D'
             ELSE 'E'
         END
+    ),
+    SGPA DECIMAL (3,2) GENERATED ALWAYS AS 
+    (
+        CASE 
+            WHEN grade ="A+" OR "A" THEN  4.00
+            WHEN grade ="A-" THEN  3.70
+            WHEN grade ="B+" THEN 3.30
+            WHEN grade ="B"  THEN  3.00
+            WHEN grade ="B-" THEN  2.70
+            WHEN grade ="C+" THEN  2.30
+            WHEN grade ="C"  THEN  2.00
+            WHEN grade ="C-" THEN  1.70
+            WHEN grade ="D+" THEN  1.30
+            WHEN grade ="D"  THEN  1.00
+            WHEN grade ="E"  THEN  0.00 
+        END
     )
 );
-
-	INSERT INTO Student_grade
-	VALUES('TG1021','eng1222',
-	'(SELECT final_marks FROM eng1222_course_marks
-	WHERE student_id="TG1021")');
-	
-	INSERT INTO Student_grade (student_id, Course_id, final_marks)
-VALUES ('TG1021', 'eng1222', (SELECT final_marks FROM eng1222_course_marks WHERE student_id = 'TG1021'));
 
 DELIMITER //
 
@@ -273,7 +185,7 @@ BEGIN
     DECLARE student_id_char CHAR(10);
     DECLARE final_marks_value DECIMAL(5,2);
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, final_marks FROM eng1222_course_marks;
+        SELECT student_id, Final_marks FROM DBMS_Theory_ICT1212_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN student_cursor;
     read_loop: LOOP
@@ -288,13 +200,18 @@ BEGIN
 END //
 DELIMITER ;
 
-CREATE PROCEDURE InsertStudentGrades(IN courseId CHAR(7))
+CALL InsertStudentGrades("ICT1212");
+
+
+
+DELIMITER //
+CREATE PROCEDURE InsertStudentGrades_ICT1233_marks(IN courseId CHAR(7))
 BEGIN
     DECLARE done INT DEFAULT FALSE;
     DECLARE student_id_char CHAR(10);
     DECLARE final_marks_value DECIMAL(5,2);
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, final_marks FROM eng1222_course_marks;
+        SELECT student_id, Final_marks FROM CompNetwork_ICT1233_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN student_cursor;
     read_loop: LOOP
@@ -309,13 +226,18 @@ BEGIN
 END //
 DELIMITER ;
 
-CREATE PROCEDURE InsertStudentGrades(IN courseId CHAR(7))
+CALL InsertStudentGrades_ICT1222_marks("ICT1233");
+
+SELECT * FROM Student_grade;
+
+DELIMITER //
+CREATE PROCEDURE InsertStudentGrades_ICT1222_marks(IN courseId CHAR(7))
 BEGIN
     DECLARE done INT DEFAULT FALSE;
     DECLARE student_id_char CHAR(10);
     DECLARE final_marks_value DECIMAL(5,2);
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, final_marks FROM eng1222_course_marks;
+        SELECT student_id, Final_marks FROM DBMS_Practical_ICT1222_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN student_cursor;
     read_loop: LOOP
@@ -330,13 +252,16 @@ BEGIN
 END //
 DELIMITER ;
 
-CREATE PROCEDURE InsertStudentGrades(IN courseId CHAR(7))
+CALL InsertStudentGrades_ICT1222_marks("ICT1222");
+
+DELIMITER //
+CREATE PROCEDURE InsertStudentGrades_ICT1233_marks(IN courseId CHAR(7))
 BEGIN
     DECLARE done INT DEFAULT FALSE;
     DECLARE student_id_char CHAR(10);
     DECLARE final_marks_value DECIMAL(5,2);
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, final_marks FROM eng1222_course_marks;
+        SELECT student_id, Final_marks FROM Serverside_ICT1233_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN student_cursor;
     read_loop: LOOP
@@ -350,14 +275,19 @@ BEGIN
     CLOSE student_cursor;
 END //
 DELIMITER ;
+CALL InsertStudentGrades_ICT1222_marks("ICT1233");
 
-CREATE PROCEDURE InsertStudentGrades(IN courseId CHAR(7))
+SELECT * FROM Student_grade;
+
+DELIMITER //
+
+CREATE PROCEDURE InsertStudentGrades_ICT1242_marks(IN courseId CHAR(7))
 BEGIN
     DECLARE done INT DEFAULT FALSE;
     DECLARE student_id_char CHAR(10);
     DECLARE final_marks_value DECIMAL(5,2);
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, final_marks FROM eng1222_course_marks;
+        SELECT student_id, Final_marks FROM computer_Archi_ICT1242_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
     OPEN student_cursor;
     read_loop: LOOP
@@ -372,11 +302,60 @@ BEGIN
 END //
 DELIMITER ;
 
+CALL InsertStudentGrades_ICT1222_marks("ICT1242");
+SELECT * FROM Student_grade;
 
 
+SELECT * FROM Student_grade;
+
+DELIMITER //
+CREATE PROCEDURE InsertStudentGrades_ICT1212_marks(IN courseId CHAR(7))
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE student_id_char CHAR(10);
+    DECLARE final_marks_value DECIMAL(5,2);
+    DECLARE student_cursor CURSOR FOR 
+        SELECT student_id, Final_marks FROM Management_ICT1212_marks;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    OPEN student_cursor;
+    read_loop: LOOP
+        FETCH student_cursor INTO student_id_char, final_marks_value;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+        INSERT INTO Student_grade (student_id, Course_id, Final_marks)
+        VALUES (student_id_char, courseId, final_marks_value);
+    END LOOP;
+    CLOSE student_cursor;
+END //
+DELIMITER ;
+
+CALL InsertStudentGrades_ICT1222_marks("ICT1212");
+
+SELECT * FROM Student_grade;
+
+ALTER TABLE Student_grade
+SGPA DECIMAL (3,2) GENERATED ALWAYS AS 
+(
+    CASE 
+        WHEN grade ="A+" OR "A" THEN  4.00
+        WHEN grade ="A-" THEN  3.70
+        WHEN grade ="B+" THEN 3.30
+        WHEN grade ="B"  THEN  3.00
+        WHEN grade ="B-" THEN  2.70
+        WHEN grade ="C+" THEN  2.30
+        WHEN grade ="C"  THEN  2.00
+        WHEN grade ="C-" THEN  1.70
+        WHEN grade ="D+" THEN  1.30
+        WHEN grade ="D"  THEN  1.00
+        WHEN grade ="E"  THEN  0.00 
+    END
+);
 
 
-INSERT INTO Student_Attandance (Stu_reg_num, Course_Id, week_01, week_02, week_03, week_04, week_05, week_06, week_07, week_08, week_09, week_10, week_11, week_12, week_13, week_14, week_15) VALUES
+INSERT INTO Student_Attandance 
+(Stu_reg_num, Course_Id, week_01, week_02, week_03, week_04, week_05, week_06, week_07, week_08, week_09, week_10, week_11, week_12, week_13, week_14, week_15) 
+VALUES
 ('TG1021', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG1021', 'ENG1222', '1', '1', '1', 'AB', '1', '1', '1', '1', '1', 'MC', '1', 'AB', '1', '1', '1'),
 ('TG1021', 'ICT1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
