@@ -34,4 +34,7 @@ VALUES
  ('TG/2022/1380','Vihanga','Manusha','200265135988','vihangamanusha@gmail.com','male','0773497292',1,'proper'),
  ('TG/2020/1055','Lakmini','Senarathna','200088995422','lakbslsenarathna@gmail.com','female','0782165213',1,'repeat'),
  ('TG/2022/1350','Madawa','Jayaweera','200269549725','msjayaweera@gmail.com','male','0770064130',1,'proper');
+ /*('TG/2020/1084','Ameera','Sashimal','200089188285','ameera27sashi@gmail.com','male','0762842539',3,'suspend'),
+ ('TG/2020/1055','Chandima','Rajeew','200124685521','chandimarajeew@gmail.com','male','0784788927',1,'suspend'),*/
+ 
  
