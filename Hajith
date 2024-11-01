@@ -48,13 +48,13 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     tech_mobie INT,
     email VARCHAR(255) NOT NULL);
 
-	CREATE TABLE Student_grade (
+CREATE TABLE Student_grade (
     student_id CHAR(10) NOT NULL,
     Course_id CHAR(7) NOT NULL,
     Final_marks DECIMAL(5,2) NOT NULL,
     grade VARCHAR(5) GENERATED ALWAYS AS (
         CASE 
-            WHEN Final_marks== 0   THEN "MC"
+            WHEN Final_marks = 0   THEN 'MC'
             WHEN Final_marks >= 90 THEN 'A+'
             WHEN Final_marks >= 85 THEN 'A'
             WHEN Final_marks >= 80 THEN 'A-'
@@ -71,17 +71,17 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     SGPA DECIMAL (3,2) GENERATED ALWAYS AS 
     (
         CASE 
-            WHEN grade ="A+" OR "A" THEN  4.00
-            WHEN grade ="A-" THEN  3.70
-            WHEN grade ="B+" THEN 3.30
-            WHEN grade ="B"  THEN  3.00
-            WHEN grade ="B-" THEN  2.70
-            WHEN grade ="C+" THEN  2.30
-            WHEN grade ="C"  THEN  2.00
-            WHEN grade ="C-" THEN  1.70
-            WHEN grade ="D+" THEN  1.30
-            WHEN grade ="D"  THEN  1.00
-            WHEN grade ="E"  THEN  0.00 
+            WHEN grade = 'A+' OR grade = 'A' THEN 4.00
+            WHEN grade = 'A-' THEN 3.70
+            WHEN grade = 'B+' THEN 3.30
+            WHEN grade = 'B' THEN 3.00
+            WHEN grade = 'B-' THEN 2.70
+            WHEN grade = 'C+' THEN 2.30
+            WHEN grade = 'C' THEN 2.00
+            WHEN grade = 'C-' THEN 1.70
+            WHEN grade = 'D+' THEN 1.30
+            WHEN grade = 'D' THEN 1.00
+            WHEN grade = 'E' THEN 0.00
         END
     )
 );
@@ -103,17 +103,6 @@ BEGIN
 END //
 
 DELIMITER ;
-
-INSERT INTO Users VALUES 
-('TO001','Anjana Nirmal', '1234', 'TechOfficer'),
-('TO002','Sapumal Bandara' ,'1234', 'TechOfficer'),
-('TO003', 'Prakeerthan', '1234', 'TechOfficer'),
-('TO004', 'Pemakaran', '1234', 'TechOfficer'),
-('TO005', 'Akram', '1234', 'TechOfficer'),
-('D001','PROF. Mr. Subash jayasinghe','1234','Dean'),
-('H001','PROF. Mr. Subash jayasinghe','1234','HOD'),
-('A001','Kusal Mendis','1234','Admin');
-
 
 DELIMITER //
 
@@ -273,6 +262,15 @@ CALL InsertStudentGrades_ICT1222_marks("ICT1212");
 SELECT * FROM Student_grade;
 
 
+INSERT INTO Users VALUES 
+('TO001','Anjana Nirmal', '1234', 'TechOfficer'),
+('TO002','Sapumal Bandara' ,'1234', 'TechOfficer'),
+('TO003', 'Prakeerthan', '1234', 'TechOfficer'),
+('TO004', 'Pemakaran', '1234', 'TechOfficer'),
+('TO005', 'Akram', '1234', 'TechOfficer'),
+('D001','PROF. Mr. Subash jayasinghe','1234','Dean'),
+('H001','PROF. Mr. Subash jayasinghe','1234','HOD'),
+('A001','Kusal Mendis','1234','Admin');
 
 
 INSERT INTO Student_Attandance 
