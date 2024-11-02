@@ -73,7 +73,7 @@ CREATE TABLE Student_Eligibility (
 
 
 
---Eligibility TO English_ICT1222_marks EM
+--Eligibility TO English_ICT1222_marks EM-------
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     EM.student_id,
@@ -89,7 +89,10 @@ FROM
 JOIN 
     Student_Attendance SA ON EM.student_id = SA.Stu_reg_num; -- Ensure this matches the correct field in the Attendance Table
 
---Eligibility TO Management_ICT1212_marks MM
+
+
+
+--Eligibility TO Management_ICT1212_marks MM---------------------
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     MM.student_id,
@@ -105,8 +108,11 @@ SELECT
     JOIN 
         Student_Attandance SA ON MM.student_id=SA.Stu_reg_num;
 
+
+
+
     
--- Eligibility TO  DBMS_Theory_ICT1212_marks
+-- Eligibility TO  DBMS_Theory_ICT1212_marks-------------------
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     DBT.student_id,
@@ -123,7 +129,10 @@ SELECT
         Student_Attandance SA ON DBT.student_id=SA.Stu_reg_num;
 
 
--- Eligibility TO  DBMS_Practical_ICT1222_marks
+
+
+
+-- Eligibility TO  DBMS_Practical_ICT1222_marks----------------
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     DBP.student_id,
@@ -140,7 +149,12 @@ SELECT
         Student_Attandance SA ON DBP.student_id=SA.Stu_reg_num;
 
 
--- Eligibility TO  Serverside_ICT1233_marks
+
+
+
+
+
+-- Eligibility TO  Serverside_ICT1233_marks----
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     SS.student_id,
@@ -157,7 +171,11 @@ SELECT
         Student_Attandance SA ON SS.student_id=SA.Stu_reg_num;
 
 
--- Eligibility TO  computer_Archi_ICT1242_marks
+
+
+
+
+-- Eligibility TO  computer_Archi_ICT1242_marks-----------
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     CAM.student_id,
@@ -176,7 +194,9 @@ SELECT
 
 
 
--- Eligibility TO  CompNetwork_ICT1233_marks
+
+
+-- Eligibility TO  CompNetwork_ICT1233_marks----
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     CNM.student_id,
@@ -194,7 +214,8 @@ SELECT
 
 
 
--- Eligibility TO  Discrete_maths_ICT1233_marks
+
+-- Eligibility TO  Discrete_maths_ICT1233_marks----------
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     DM.student_id,
@@ -213,7 +234,12 @@ SELECT
 
 
 
---check eligibility  as individuals 
+
+
+
+
+
+------------------------ check eligibility  as individuals ----------------------------------
 SELECT 
     student_id,
     course_id,
@@ -223,7 +249,7 @@ FROM
 WHERE 
     student_id='TG/2022/1415';
 
--- check eligibility for the whole batch
+------------------------- check eligibility for the whole batch-------------------------------
 SELECT 
     student_id,
     course_id,
@@ -231,7 +257,136 @@ SELECT
 FROM 
     Student_Eligibility
 WHERE 
-    SUBSTRING(student_id, 4, 4) = '2022' -- Filtering for batch 2022
+    SUBSTRING(student_id, 4, 4) = '2022'; -- Filtering for batch 2022
 
 
+
+
+
+
+-----------------------------------Student_Performance (GPA) TABLE -------------------------------------
+
+CREATE TABLE Student_Performance (
+    student_id VARCHAR(10) NOT NULL,
+    semester INT NOT NULL,
+    total_credits INT DEFAULT 0,
+    total_grade_points DECIMAL(10, 2) DEFAULT 0.00,
+    SGPA DECIMAL(3, 2) GENERATED ALWAYS AS (
+        CASE 
+            WHEN total_credits = 0 THEN 0.00
+            ELSE total_grade_points / total_credits
+        END
+    ) STORED,
+    GPA DECIMAL(3, 2) GENERATED ALWAYS AS (
+        CASE 
+            WHEN total_credits = 0 THEN 0.00
+            ELSE total_grade_points / total_credits
+        END
+    ) STORED,
+    CGPA DECIMAL(3, 2) DEFAULT 0.00,  -- This will need to be updated periodically
+    PRIMARY KEY (student_id, semester),
+    FOREIGN KEY (student_id) REFERENCES STUDENT(student_id)
+);
+
+
+
+-- Now insert data into Student_Performance
+INSERT INTO Student_Performance (student_id, semester, total_credits, total_grade_points)
+SELECT 
+    sg.student_id,
+    sg.semester,
+    SUM(c.CouCredit) AS total_credits,
+    SUM(c.CouCredit * 
+        CASE 
+            WHEN sg.grade = 'A+' THEN 4.00
+            WHEN sg.grade = 'A'  THEN 4.00
+            WHEN sg.grade = 'A-' THEN 3.70
+            WHEN sg.grade = 'B+' THEN 3.30
+            WHEN sg.grade = 'B'  THEN 3.00
+            WHEN sg.grade = 'B-' THEN 2.70
+            WHEN sg.grade = 'C+' THEN 2.30
+            WHEN sg.grade = 'C'  THEN 2.00
+            WHEN sg.grade = 'C-' THEN 1.70
+            WHEN sg.grade = 'D'  THEN 1.00
+            WHEN sg.grade = 'E'  THEN 0.00
+            ELSE 0.00
+        END
+    ) AS total_grade_points
+FROM 
+    Student_grade sg
+JOIN 
+    Course c ON sg.Course_id = c.CouId
+GROUP BY 
+    sg.student_id, sg.semester;
+
+
+----------------------------------Procedure to Calculate SGPA for a Single Student------------------------
+DELIMITER //
+
+CREATE PROCEDURE Calculate_SGPA(IN studentID VARCHAR(10), OUT sgpa DECIMAL(5,2))
+BEGIN
+    SELECT 
+        SUM(gp.grade_point) / COUNT(*) INTO sgpa
+    FROM 
+        Student_Grades sg
+    JOIN 
+        Grade_Points gp ON sg.grade = gp.grade
+    WHERE 
+        sg.student_id = studentID;
+END //
+
+DELIMITER ;
+-----------------------------------Procedure to Calculate CGPA for a Single Student------------------------
+DELIMITER //
+
+CREATE PROCEDURE Calculate_CGPA(IN studentID VARCHAR(10), OUT cgpa DECIMAL(5,2))
+BEGIN
+    SELECT 
+        AVG(sgpa) INTO cgpa
+    FROM 
+        (SELECT 
+            SUM(gp.grade_point) / COUNT(*) AS sgpa
+         FROM 
+            Student_Grades sg
+         JOIN 
+            Grade_Points gp ON sg.grade = gp.grade
+         WHERE 
+            sg.student_id = studentID
+         GROUP BY 
+            sg.subject_code) AS temp;
+END //
+
+DELIMITER ;
+-------------------------------------Procedure to Calculate Average SGPA for All Students in a Batch----------------
+DELIMITER //
+
+CREATE PROCEDURE Calculate_Batch_SGPA(OUT batch_avg_sgpa DECIMAL(5,2))
+BEGIN
+    SELECT 
+        AVG(sgpa) INTO batch_avg_sgpa
+    FROM 
+        (SELECT 
+            SUM(gp.grade_point) / COUNT(*) AS sgpa
+         FROM 
+            Student_Grades sg
+         JOIN 
+            Grade_Points gp ON sg.grade = gp.grade
+         GROUP BY 
+            sg.student_id) AS temp;
+END //
+
+DELIMITER ;
+------------------------------------Calling the Procedures----------------------------------------
+---------------------------------------------------------------------------------------------------
+------------------------------Calculate SGPA for a Student-----------------------------------------
+CALL Calculate_SGPA('TG/2022/1415', @student_sgpa);
+SELECT @student_sgpa AS SGPA;
+
+-------------------------------Calculate CGPA for a Student----------------------------------------
+CALL Calculate_CGPA('TG/2022/1415', @student_cgpa);
+SELECT @student_cgpa AS CGPA;
+
+--------------------------------Calculate Average SGPA for All Students in a Batch------------------
+CALL Calculate_Batch_SGPA(@batch_avg_sgpa);
+SELECT @batch_avg_sgpa AS Batch_Average_SGPA;
 
