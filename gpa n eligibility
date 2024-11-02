@@ -9,11 +9,14 @@ PRIMARY KEY (LecId)
 
 
 CREATE TABLE Course(
-CouId CHAR (7) NOT NULL,
+CouId VARCHAR (10) NOT NULL,
 CouName VARCHAR (50),
 CouCredit INT,
+Course_time INT,
 CourType VARCHAR (30),
 PRIMARY KEY(CouId));
+/*--CrediT INT,--*/
+
 
 INSERT INTO Lecture
 VALUES
@@ -54,16 +57,22 @@ VALUES
 CREATE TABLE Student_Eligibility (
     student_id VARCHAR(10) NOT NULL,
     course_id CHAR(7) NOT NULL,
-    ca_marks DECIMAL(5, 2) NOT NULL, -- Continuous Assessment Marks
-    attendance_percentage DECIMAL(5, 2) NOT NULL, -- Attendance Percentage
-   -- scaled_CA_marks DECIMAL(5, 2),
-    eligibility_status VARCHAR(20)/* GENERATED ALWAYS AS (
-        CASE 
-            WHEN attendance_percentage >= 80 AND scaled_CA_marks >= 50 THEN 'Eligible'
-            ELSE 'Not Eligible'
-        END
-    ) STORED,*/
+    ca_marks DECIMAL(5, 2) NOT NULL, 
+    attendance_percentage DECIMAL(5, 2) NOT NULL,
+    eligibility_status VARCHAR(20)
     
+);
+
+
+CREATE TABLE Student_Eligibility (
+    student_id VARCHAR(10) NOT NULL,
+    course_id CHAR(7) NOT NULL,
+    ca_marks DECIMAL(5, 2) NOT NULL, 
+    attendance_percentage DECIMAL(5, 2) NOT NULL, 
+    eligibility_status VARCHAR(10),
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES STUDENT(student_id),
+    FOREIGN KEY (course_id) REFERENCES COURSE(CouId)
 );
 
 
@@ -73,17 +82,23 @@ CREATE TABLE Student_Eligibility (
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
 SELECT 
     EM.student_id,
-    'ENG1222' AS course_id, -- Replace with the actual course ID
-    (EM.Final_CA_marks * 100) / 40 AS ca_marks, -- Assuming Final_CA_marks is scaled out of 40
+    'ENG1222' AS course_id, 
+    (EM.Finl_CA_marks * 100) / 40 AS ca_marks, 
     SA.Percentage AS attendance_percentage,
     CASE 
-        WHEN SA.Percentage >= 80 AND (EM.Final_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
+        WHEN SA.Percentage >= 80 AND (EM.Finl_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
         ELSE 'Not Eligible'
     END AS eligibility_status 
 FROM 
     English_ENG1222_marks AS EM
 JOIN 
-    Student_Attandance SA ON EM.student_id = SA.Stu_reg_num; -- Ensure this matches the correct field in the Attendance Table
+    Student_Attandance SA ON EM.student_id = SA.Stu_reg_num
+ON DUPLICATE KEY UPDATE
+    ca_marks = VALUES(ca_marks),
+    attendance_percentage = VALUES(attendance_percentage),
+    eligibility_status = VALUES(eligibility_status);
+-- Ensure this matches the correct field in the Attendance Table
+
 
 
 
@@ -93,16 +108,22 @@ INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_per
 SELECT 
     MM.student_id,
     'TCS1212' AS course_id,
-    (MM.Final_CA_marks*100)/40 AS ca_marks,
+    (MM.Final_CA_marks * 100) / 40 AS ca_marks,
     SA.Percentage AS attendance_percentage,
     CASE 
         WHEN SA.Percentage >= 80 AND (MM.Final_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
-    ELSE 'Not Eligible'
+        ELSE 'Not Eligible'
     END AS eligibility_status 
-    FROM 
-        Management_TCS1212_marks AS MM
-    JOIN 
-        Student_Attandance SA ON MM.student_id=SA.Stu_reg_num;
+FROM 
+    Management_TCS1212_marks AS MM
+JOIN 
+    Student_Attandance SA ON MM.student_id = SA.Stu_reg_num
+ON DUPLICATE KEY UPDATE
+    ca_marks = VALUES(ca_marks),
+    attendance_percentage = VALUES(attendance_percentage),
+    eligibility_status = VALUES(eligibility_status);
+
+
 
 
 
@@ -113,16 +134,21 @@ INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_per
 SELECT 
     DBT.student_id,
     'ICT1212' AS course_id,
-    (DBT.Final_CA_marks*100)/30 AS ca_marks,
+    (DBT.Finl_CA_marks * 100) / 30 AS ca_marks,  -- Use Finl_CA_marks here
     SA.Percentage AS attendance_percentage,
     CASE 
-        WHEN SA.Percentage >= 80 AND (DBT.Final_CA_marks * 100) / 30 >= 50 THEN 'Eligible'
-    ELSE 'Not Eligible'
+        WHEN SA.Percentage >= 80 AND (DBT.Finl_CA_marks * 100) / 30 >= 50 THEN 'Eligible'
+        ELSE 'Not Eligible'
     END AS eligibility_status 
-    FROM 
-        DBMS_Theory_ICT1212_marks AS DBT
-    JOIN 
-        Student_Attandance SA ON DBT.student_id=SA.Stu_reg_num;
+FROM 
+    DBMS_Theory_ICT1212_marks AS DBT
+JOIN 
+    Student_Attendance SA ON DBT.student_id = SA.Stu_reg_num
+ON DUPLICATE KEY UPDATE
+    ca_marks = VALUES(ca_marks),
+    attendance_percentage = VALUES(attendance_percentage),
+    eligibility_status = VALUES(eligibility_status);
+
 
 
 
@@ -133,16 +159,20 @@ INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_per
 SELECT 
     DBP.student_id,
     'ICT1222' AS course_id,
-    (DBP.Final_CA_marks*100)/30 AS ca_marks,
+    (DBP.Finl_CA_marks * 100) / 30 AS ca_marks,
     SA.Percentage AS attendance_percentage,
     CASE 
-        WHEN SA.Percentage >= 80 AND (DBP.Final_CA_marks * 100) / 30 >= 50 THEN 'Eligible'
+        WHEN SA.Percentage >= 80 AND (DBP.Finl_CA_marks * 100) / 30 >= 50 THEN 'Eligible'
         ELSE 'Not Eligible'
     END AS eligibility_status 
-    FROM 
-        DBMS_Practical_ICT1222_marks AS DBP
-    JOIN 
-        Student_Attandance SA ON DBP.student_id=SA.Stu_reg_num;
+FROM 
+    DBMS_Practical_ICT1222_marks AS DBP
+JOIN 
+    Student_Attandance SA ON DBP.student_id = SA.Stu_reg_num
+ON DUPLICATE KEY UPDATE
+    ca_marks = VALUES(ca_marks),
+    attendance_percentage = VALUES(attendance_percentage),
+    eligibility_status = VALUES(eligibility_status);
 
 
 
@@ -152,19 +182,25 @@ SELECT
 
 -- Eligibility TO  Serverside_ICT1233_marks----
 INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_percentage, eligibility_status)
-SELECT 
+SELECT
     SS.student_id,
     'ICT1233' AS course_id,
-    (SS.Final_CA_marks*100)/40 AS ca_marks,
+    (SS.Finl_CA_marks * 100) / 40 AS ca_marks,  
     SA.Percentage AS attendance_percentage,
-    CASE 
-        WHEN SA.Percentage >= 80 AND (SS.Final_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
+    CASE
+        WHEN SA.Percentage >= 80 AND (SS.Finl_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
         ELSE 'Not Eligible'
-    END AS eligibility_status 
-    FROM 
-        Serverside_ICT1233_marks AS SS
-    JOIN 
-        Student_Attandance SA ON SS.student_id=SA.Stu_reg_num;
+    END AS eligibility_status
+FROM
+    Serverside_ICT1233_marks AS SS
+JOIN
+    Student_Attandance SA ON SS.student_id = SA.Stu_reg_num
+ON DUPLICATE KEY UPDATE
+    ca_marks = VALUES(ca_marks),
+    attendance_percentage = VALUES(attendance_percentage),
+    eligibility_status = VALUES(eligibility_status);
+
+
 
 
 
@@ -176,16 +212,21 @@ INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_per
 SELECT 
     CAM.student_id,
     'ICT1242' AS course_id,
-    (CAM.Final_CA_marks*100)/40 AS ca_marks,
+    (CAM.Finl_CA_marks * 100) / 40 AS ca_marks,
     SA.Percentage AS attendance_percentage,
     CASE 
-        WHEN SA.Percentage >= 80 AND (CAM.Final_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
+        WHEN SA.Percentage >= 80 AND (CAM.Finl_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
         ELSE 'Not Eligible'
     END AS eligibility_status 
-    FROM 
-        computer_Archi_ICT1242_marks AS CAM
-    JOIN 
-        Student_Attandance SA ON CAM.student_id=SA.Stu_reg_num;
+FROM 
+    computer_Archi_ICT1242_marks AS CAM
+JOIN 
+    Student_Attandance SA ON CAM.student_id = SA.Stu_reg_num
+ON DUPLICATE KEY UPDATE
+    ca_marks = VALUES(ca_marks),
+    attendance_percentage = VALUES(attendance_percentage),
+    eligibility_status = VALUES(eligibility_status);
+
 
 
 
@@ -197,16 +238,21 @@ INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_per
 SELECT 
     CNM.student_id,
     'ICT1253' AS course_id,
-    (CNM.Final_CA_marks*100)/30 AS ca_marks,
+    (CNM.Finl_CA_marks * 100) / 30 AS ca_marks,
     SA.Percentage AS attendance_percentage,
     CASE 
-        WHEN SA.Percentage >= 80 AND (CNM.Final_CA_marks * 100) / 30 >= 50 THEN 'Eligible'
+        WHEN SA.Percentage >= 80 AND (CNM.Finl_CA_marks * 100) / 30 >= 50 THEN 'Eligible'
         ELSE 'Not Eligible'
     END AS eligibility_status 
-    FROM 
-        CompNetwork_ICT1253_marks AS CNM
-    JOIN 
-        Student_Attandance SA ON CNM.student_id=SA.Stu_reg_num;
+FROM 
+    CompNetwork_ICT1253_marks AS CNM
+JOIN 
+    Student_Attandance SA ON CNM.student_id = SA.Stu_reg_num
+ON DUPLICATE KEY UPDATE
+    ca_marks = VALUES(ca_marks),
+    attendance_percentage = VALUES(attendance_percentage),
+    eligibility_status = VALUES(eligibility_status);
+
 
 
 
@@ -216,16 +262,20 @@ INSERT INTO Student_Eligibility (student_id, course_id, ca_marks, attendance_per
 SELECT 
     DM.student_id,
     'TMS1223' AS course_id,
-    (DM.Final_CA_marks*100)/40 AS ca_marks,
+    (DM.Finl_CA_marks * 100) / 40 AS ca_marks,
     SA.Percentage AS attendance_percentage,
     CASE 
-        WHEN SA.Percentage >= 80 AND (DM.Final_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
+        WHEN SA.Percentage >= 80 AND (DM.Finl_CA_marks * 100) / 40 >= 50 THEN 'Eligible'
         ELSE 'Not Eligible'
     END AS eligibility_status 
-    FROM 
-        Discrete_maths_TMS1233_marks DM
-    JOIN 
-        Student_Attandance SA ON DM.student_id=SA.Stu_reg_num;
+FROM 
+    Discrete_maths_TMS1233_marks AS DM
+JOIN 
+    Student_Attandance AS SA ON DM.student_id = SA.Stu_reg_num
+ON DUPLICATE KEY UPDATE
+    ca_marks = VALUES(ca_marks),
+    attendance_percentage = VALUES(attendance_percentage),
+    eligibility_status = VALUES(eligibility_status);
 
 
 
@@ -243,7 +293,7 @@ SELECT
 FROM 
     Student_Eligibility
 WHERE 
-    student_id='TG/2022/1415';
+    student_id='TG/2022/1310';
 
 ------------------------- check eligibility for the whole batch-------------------------------
 SELECT 
@@ -253,10 +303,10 @@ SELECT
 FROM 
     Student_Eligibility
 WHERE 
-    SUBSTRING(student_id, 4, 4) = '2022'; -- Filtering for batch 2022
+    SUBSTRING(student_id, 4, 4) = '2022';
 
 
-
+ -- Filtering for batch 2022
 
 
 
@@ -264,24 +314,25 @@ WHERE
 
 
 CREATE TABLE Student_Performance (
-    student_id VARCHAR(10) NOT NULL,
-    semester_no INT NOT NULL DEFAULT 1,
-    SGPA DECIMAL(3,2),
+    student_id VARCHAR(12) NOT NULL,
+    semester_no INT,
+    Full_SGPA DECIMAL(3,2),
     CGPA DECIMAL(3,2),
     GPA DECIMAL(3,2),
-    PRIMARY KEY (student_id, semester_no),
-    FOREIGN KEY (student_id) REFERENCES STUDENT(student_id)
+    PRIMARY KEY (student_id, semester_no)
 );
+
 
 
 ---------------------------Data insert to  Student_Performance (GPA) TABLE -----------
 
 
-INSERT INTO Student_Performance (student_id, semester_no,Full_SGPA,CGPA,GPA)
-SELECT 
+
+INSERT INTO Student_Performance (student_id, semester_no, Full_SGPA, CGPA, GPA)
+SELECT
     sg.student_id,
     1 AS semester_no,
-    (SUM(c.CouCredit * CASE 
+    (SUM(c.CouCredit * CASE
         WHEN sg.Final_marks >= 90 THEN 4.00
         WHEN sg.Final_marks >= 85 THEN 3.70
         WHEN sg.Final_marks >= 80 THEN 3.30
@@ -295,76 +346,65 @@ SELECT
         ELSE 0.00
     END) / NULLIF(SUM(c.CouCredit), 0)) AS Full_SGPA,
     NULL AS CGPA,
-    NULL AS GPA 
-FROM 
-    Student_grade AS sg
-JOIN 
-    Course AS c ON sg.Course_id = c.CouId
-GROUP BY 
+    NULL AS GPA
+FROM
+    Student_grade sg
+JOIN
+    Course c ON sg.Course_id = c.CouId
+GROUP BY
     sg.student_id;
 
   
 
 -----------CGPA for each student (current semester)----
-/*UPDATE Student_Performance sp
-SET CGPA = (
-    SELECT 
-        AVG(Full_SGPA)
-    FROM 
-        Student_Performance sp,Student_grade sg
-    WHERE 
-        sg.student_id = sp.student_id 
-);
-*/
 
-
-
--- Update CGPA for each student (current semester)
 UPDATE Student_Performance sp
-SET CGPA = (
-    SELECT 
-        AVG(sp2.Full_SGPA)  -- Use SGPA from the same table with alias sp2
-    FROM 
-        Student_Performance sp2  -- Alias for the same table
-    WHERE 
-        sp2.student_id = sp.student_id AND sp2.semester_no <= sp.semester_no
-);
+JOIN (
+    SELECT
+        student_id,
+        AVG(Full_SGPA) AS Avg_CGPA
+    FROM
+        Student_Performance
+    GROUP BY
+        student_id
+) AS avg_cgpa ON sp.student_id = avg_cgpa.student_id
+SET sp.CGPA = avg_cgpa.Avg_CGPA;
+
 
 
 
 -----------  GPA for each student------------------
 
-/*
 UPDATE Student_Performance sp
-SET GPA = (
+JOIN (
     SELECT 
-        AVG(Full_SGPA)
+        student_id,
+        AVG(Full_SGPA) AS avg_full_sgpa
     FROM 
-        Student_Performance sg
-    WHERE 
-        sg.student_id = sp.student_id
-);
-*/
+        Student_Performance
+    GROUP BY 
+        student_id
+) AS avg_sp ON sp.student_id = avg_sp.student_id
+SET sp.GPA = avg_sp.avg_full_sgpa;
 
 
--- Update GPA for each student
-UPDATE Student_Performance sp
-SET GPA = (
-    SELECT 
-        AVG(sp2.SGPA)  -- Use SGPA from the same table with alias sp2
-    FROM 
-        Student_Performance sp2  -- Alias for the same table
-    WHERE 
-        sp2.student_id = sp.student_id
-);
+
+
+
+
+
 
 
 
 
 
 ----------------------------------Procedure to get performances for a Single Student------------------------
+
+    
+
 DELIMITER //
-CREATE PROCEDURE GetStudentPerformance(IN studentID VARCHAR(10),OUT sgpa DECIMAL(5,2))
+
+CREATE PROCEDURE GetStudentPerformance(IN studentID VARCHAR(12), OUT sgpa DECIMAL(5,2))
 BEGIN
     SELECT
         sp.student_id,
@@ -374,12 +414,19 @@ BEGIN
         sp.CGPA,
         sg.grade
     FROM 
-        Student_grade sg,Student_Performance sp
+        Student_grade sg
+    JOIN
+        Student_Performance sp ON sp.student_id = sg.student_id
     WHERE
-        sp.student_id=sg.student_id AND sp.student_id=studentID;
-END//
-DELIMITER;
+        sp.student_id = studentID;
+
     
+    SELECT Full_SGPA INTO sgpa FROM Student_Performance WHERE student_id = studentID;
+END //
+
+DELIMITER ;
+
+
 
 -------------------------------------Procedure to performance of All Students in a Batch----------------
 DELIMITER //
@@ -396,19 +443,47 @@ BEGIN
          Student_grade sg,Student_Performance sp
     WHERE
         sp.student_id=sg.student_id;
-       sp.student_id(SUBSTRING(student_id, 4, 4))=batch_year;
+       SUBSTRING(sp.student_id, 4, 4)=batch_year;
 END//
 DELIMITER;
+---------------------------drop------------------------------
+ DROP PROCEDURE IF EXISTS GetStudentPerformance;
+-----------------------------------------------------------
+
+DELIMITER //
+CREATE PROCEDURE GetBatchPerformance(IN batch_year INT)
+BEGIN
+    SELECT
+        sp.student_id,
+        sg.Course_id,
+        sp.semester_no,
+        sp.Full_SGPA,
+        sp.CGPA,
+        sg.grade
+    FROM
+        Student_grade sg, Student_Performance sp
+    WHERE
+        sp.student_id = sg.student_id AND
+        SUBSTRING(sp.student_id, 4, 4) = batch_year;
+END//
+DELIMITER ;
 
 
 ------------------------------------Calling the Procedures----------------------------------------
----------------------------------------------------------------------------------------------------
-
 
 ----------To get the performance for a specific student----------------
 
-CALL GetStudentPerformance('TG/2022/1415');
+CALL GetStudentPerformance('TG/2022/1410', @sgpa_output);
 
---To get the performance for all students --------------------
+
+
+--------------------------To get the performance for all students --------------------
 
 CALL GetBatchPerformance(2022);
+
+
+
+
+
+
+
