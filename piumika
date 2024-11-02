@@ -9,10 +9,9 @@ PRIMARY KEY (LecId)
 
 
 CREATE TABLE Course(
-CouId VARCHAR (10) NOT NULL,
+CouId CHAR (7) NOT NULL,
 CouName VARCHAR (50),
 CouCredit INT,
-CrediT INT,
 CourType VARCHAR (30),
 PRIMARY KEY(CouId));
 
