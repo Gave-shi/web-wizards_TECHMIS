@@ -1,0 +1,13 @@
+CREATE TABLE STUDENT(
+ student_id VARCHAR(10) NOT NULL,
+ fname VARCHAR(30),
+ lname VARCHAR(30),
+ NIC INT(12),
+ email VARCHAR(50),
+ gender VARCHAR(10),
+ mobile INT(11),
+ batch INT NOT NULL,
+ status VARCHAR(20),
+ PRIMARY KEY(student_id)
+ );
+ 

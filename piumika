@@ -12,11 +12,9 @@ CREATE TABLE Course(
 CouId VARCHAR (10) NOT NULL,
 CouName VARCHAR (50),
 CouCredit INT,
-Credit hours INT,
+CrediT INT,
 CourType VARCHAR (30),
-PRIMARY KEY(CouId)
-
-);
+PRIMARY KEY(CouId));
 
 INSERT INTO Lecture
 VALUES
@@ -50,6 +48,7 @@ VALUES
 ('TMS1223','Discrete Mathematics',3,15,'Theory'),
 ('ENG1222','English II',2,15,'Theory'),
 ('TCS1212','Fundamentals of Management',2,15,'Theory');
+
 
 
 
