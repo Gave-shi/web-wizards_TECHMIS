@@ -10,14 +10,12 @@ CREATE TABLE MARKS(
     mid_practical INT DEFAULT 0,
     mid_theory INT DEFAULT 0,
     final_theory INT DEFAULT 0,
-    final_practical INT DEFAULT 0,
-    PRIMARY KEY(student_id, course_id)
+    final_practical INT DEFAULT 0
 );
 
 -- DBMS Theory Table
 CREATE TABLE DBMS_Theory_ICT1212_marks(
     student_id VARCHAR(10) NOT NULL,
-    CouId VARCHAR (10),
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
@@ -27,10 +25,7 @@ CREATE TABLE DBMS_Theory_ICT1212_marks(
     group_project DECIMAL(5, 2) DEFAULT 0.00,
     Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_theory * 0.20 + final_quiz_marks) STORED,
     end_theory INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_theory * 0.70) STORED,
-    PRIMARY KEY(student_id,CouId),
-    FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
-    FOREIGN KEY(CouId) REFERENCES Course(CouId)
+    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_theory * 0.70) STORED 
 );
 
 -- DBMS Practical Table
@@ -40,13 +35,12 @@ CREATE TABLE DBMS_Practical_ICT1222_marks(
     group_project DECIMAL(5, 2) DEFAULT 0.00,
     Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_practical * 0.20 + group_project * 0.10) STORED,
     end_practical INT DEFAULT 0,
-    FOREIGN KEY(CouId) REFERENCES Course(CouId)
+    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_practical * 0.70) STORED 
 );
 
 -- Server-side Development Table
 CREATE TABLE Serverside_ICT1233_marks(
     student_id VARCHAR(10) NOT NULL,
-    CouId VARCHAR (10),
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
@@ -56,16 +50,12 @@ CREATE TABLE Serverside_ICT1233_marks(
     group_project DECIMAL(5, 2) DEFAULT 0.00,
     Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.10 + final_quiz_marks + group_project * 0.15 + tutorial_assignment * 0.05) STORED,
     end_theory INT DEFAULT 0,
-    end_practical INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_theory * 0.40 + end_practical * 0.20) STORED,
-    PRIMARY KEY(student_id,CouId),
-    FOREIGN KEY(CouId) REFERENCES Course(CouId)
+    end_practical INT DEFAULT 0
 );
 
 -- Computer Architecture Table
 CREATE TABLE computer_Archi_ICT1242_marks(
     student_id VARCHAR(10) NOT NULL,
-    CouId VARCHAR (10),
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
@@ -74,16 +64,13 @@ CREATE TABLE computer_Archi_ICT1242_marks(
     mid_exam INT DEFAULT 0,
     Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.20 + final_quiz_marks + inclass_assignment * 0.10) STORED,
     end_theory INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_theory * 0.60) STORED,
-    PRIMARY KEY(student_id,CouId),
-    FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
-    FOREIGN KEY(CouId) REFERENCES Course(CouId)
+    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_theory * 0.60) STORED
+   
 );
 
 -- Computer Networks Table
-CREATE TABLE CompNetwork_ICT1233_marks(
+CREATE TABLE CompNetwork_ICT1253_marks(
     student_id VARCHAR(10) NOT NULL,
-    CouId VARCHAR (10),
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
@@ -93,16 +80,13 @@ CREATE TABLE CompNetwork_ICT1233_marks(
     Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (inclass_assignment * 0.10 + final_quiz_marks + practical_assignment * 0.10) STORED,
     end_theory INT DEFAULT 0,
     end_practical INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + ((end_theory + end_practical) * 0.70)) STORED,
-    PRIMARY KEY(student_id,CouId),
-    FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
-    FOREIGN KEY(CouId) REFERENCES Course(CouId)
+    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + ((end_theory + end_practical) * 0.70)) STORED
+   
 );
 
 -- Discrete Mathematics Table
-CREATE TABLE Discrete_maths_ICT1233_marks(
+CREATE TABLE Discrete_maths_TMS1233_marks(
     student_id VARCHAR(10) NOT NULL,
-    CouId VARCHAR (10),
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
@@ -111,16 +95,13 @@ CREATE TABLE Discrete_maths_ICT1233_marks(
     mid_exam INT DEFAULT 0,
     Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.25 + final_quiz_marks + tutorial_assignment * 0.05) STORED,
     end_exam INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_exam * 0.60) STORED,
-    PRIMARY KEY(student_id,CouId),
-    FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
-    FOREIGN KEY(CouId) REFERENCES Course(CouId)
+    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_exam * 0.60) STORED
+   
 );
 
 -- Management Table
-CREATE TABLE Management_ICT1212_marks(
+CREATE TABLE Management_TCS1212_marks(
     student_id VARCHAR(10) NOT NULL,
-    CouId VARCHAR (10),
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
     quiz_3 INT DEFAULT 0,
@@ -128,16 +109,13 @@ CREATE TABLE Management_ICT1212_marks(
     mid_exam INT DEFAULT 0,
     Final_CA_marks DECIMAL(5, 2) GENERATED ALWAYS AS (mid_exam * 0.20 + final_quiz_marks) STORED,
     end_exam INT DEFAULT 0,
-    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_exam * 0.60) STORED,
-    PRIMARY KEY(student_id,CouId),
-    FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
-    FOREIGN KEY(CouId) REFERENCES Course(CouId)
+    Final_marks DECIMAL(5, 2) GENERATED ALWAYS AS (Final_CA_marks + end_exam * 0.60) STORED
+   
 );
 
  -- English Table
-CREATE TABLE English_ICT1222_marks(
+CREATE TABLE English_ENG1222_marks(
  student_id VARCHAR(10) NOT NULL,
- CouId VARCHAR (10),
  quiz_1 INT(4) DEFAULT 0,
  quiz_2 INT(4) DEFAULT 0,
  quiz_3 INT(4) DEFAULT 0,
@@ -146,137 +124,135 @@ CREATE TABLE English_ICT1222_marks(
  mid_exam INT(4) DEFAULT 0,
  Final_CA_marks DECIMAL(5,2) DEFAULT 0.00 GENERATED ALWAYS AS(mid_exam*0.20+final_quiz_marks) STORED,
  end_exam INT(4)DEFAULT 0,
- Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+end_exam*0.60) STORED,
- PRIMARY KEY(student_id,CouId),
- FOREIGN KEY(student_id) REFERENCES STUDENT(student_id),
- FOREIGN KEY(CouId) REFERENCES Course(CouId)
+ Final_marks DECIMAL(5,2)DEFAULT 0.00 GENERATED ALWAYS AS(Final_CA_marks+end_exam*0.60) STORED
  );
 
 
- INSERT INTO DBMS_Theory_ICT1212_marks
- ( student_id,CouId,quiz_1,quiz_2,quiz_3,mid_theory,end_theory,)
- VALUES
- ('TG/2022/1310','ICT1212',45,75,85,55,75),
- ('TG/2022/1587','ICT1212',88,87,80,84,60),
- ('TG/2022/1343','ICT1212',90,85,94,84,79),
- ('TG/2022/1388','ICT1212',80,24,55,65,71),
- ('TG/2022/1453','ICT1212',45,64,35,57,64),
- ('TG/2022/1410','ICT1212',90,78,88,75,85),
- ('TG/2022/1476','ICT1212',88,95,87,85,88),
- ('TG/2022/1594','ICT1212',95,96,90,88,80),
- ('TG/2022/1583','ICT1212',88,98,100,87,85),
- ('TG/2022/1380','ICT1212',78,85,90,94,84),
- ('TG/2022/1350','ICT1212',75,88,64,82,75);
+ INSERT INTO DBMS_Theory_ICT1212_marks 
+(student_id, quiz_1, quiz_2, quiz_3, mid_theory, end_theory) 
+VALUES 
+('TG1310', 45, 75, 85, 55, 75),
+('TG1587', 88, 87, 80, 84, 60),
+('TG1343', 90, 85, 94, 84, 79),
+('TG1388', 80, 24, 55, 65, 71),
+('TG1453', 45, 64, 35, 57, 64),
+('TG1410', 90, 78, 88, 75, 85),
+('TG1476', 88, 95, 87, 85, 88),
+('TG1594', 95, 96, 90, 88, 80),
+('TG1583', 88, 98, 100, 87, 85),
+('TG1380', 78, 85, 90, 94, 84),
+('TG1350', 75, 88, 64, 82, 75);
+
 
 
 
 
 
 INSERT INTO DBMS_Practical_ICT1222_marks
-( student_id,CouId,mid_practical,group_project,end_practical)
+( student_id,mid_practical,group_project,end_practical)
 VALUES
- ('TG/2022/1310','ICT1222',88,75,65),
- ('TG/2022/1587','ICT1222',78,64,55),
- ('TG/2022/1343','ICT1222',65,78,63),
- ('TG/2022/1388','ICT1222',80,87,48),
- ('TG/2022/1453','ICT1222',75,65,50),
- ('TG/2022/1410','ICT1222',75,80,85),
- ('TG/2022/1476','ICT1222',87,50,80),
- ('TG/2022/1594','ICT1222',85,90,90),
- ('TG/2022/1583','ICT1222',70,70,80),
- ('TG/2022/1380','ICT1222',75,74,68),
- ('TG/2022/1350','ICT1222',80,84,86);
+ ('TG1310',88,75,65),
+ ('TG1587',78,64,55),
+ ('TG1343',65,78,63),
+ ('TG1388',80,87,48),
+ ('TG1453',75,65,50),
+ ('TG1410',75,80,85),
+ ('TG1476',87,50,80),
+ ('TG1594',85,90,90),
+ ('TG1583',70,70,80),
+ ('TG1380',75,74,68),
+ ('TG1350',80,84,86);
 
 
 
 
 INSERT INTO Serverside_ICT1233_marks
-(student_id ,CouId,quiz_1,quiz_2,quiz_3,tutorial_assignment,mid_exam,group_project,end_theory,end_practical)
+(student_id ,quiz_1,quiz_2,quiz_3,tutorial_assignment,mid_exam,group_project,end_theory,end_practical)
 VALUES
- ('TG/2022/1310','ICT1233',75,88,94,75,75,80,75,65),
- ('TG/2022/1587','ICT1233',88,85,90,67,84,75,65,75),
- ('TG/2022/1343','ICT1233',95,90,94,85,75,70,80,65),
- ('TG/2022/1388','ICT1233',75,85,100,65,76,80,85,90),
- ('TG/2022/1453','ICT1233',80,85,85,65,77,75,88,60), 
- ('TG/2022/1410','ICT1233',96,78,84,64,45,65,94,78),
- ('TG/2022/1476','ICT1233',45,45,84,63,51,50,50,65),
- ('TG/2022/1594','ICT1233',87,99,92,70,58,45,62,60),
- ('TG/2022/1583','ICT1233',98,95,90,44,64,84,84,45),
- ('TG/2022/1380','ICT1233',75,84,75,41,95,45,55,50),
- ('TG/2022/1350','ICT1233',90,97,25,35,65,45,40,64);
+ ('TG1310',75,88,94,75,75,80,75,65),
+ ('TG1587',88,85,90,67,84,75,65,75),
+ ('TG1343',95,90,94,85,75,70,80,65),
+ ('TG1388',75,85,100,65,76,80,85,90),
+ ('TG1453',80,85,85,65,77,75,88,60), 
+ ('TG1410',96,78,84,64,45,65,94,78),
+ ('TG1476',45,45,84,63,51,50,50,65),
+ ('TG1594',87,99,92,70,58,45,62,60),
+ ('TG1583',98,95,90,44,64,84,84,45),
+ ('TG1380',75,84,75,41,95,45,55,50),
+ ('TG1350',90,97,25,35,65,45,40,64);
 
 
 
 INSERT INTO computer_Archi_ICT1242_marks
-(student_id,CouId,quiz_1,quiz_2,quiz_3,inclass_assignment,mid_exam,end_theory)
+(student_id,quiz_1,quiz_2,quiz_3,inclass_assignment,mid_exam,end_theory)
 VALUES
- ('TG/2022/1310','ICT1242',80,77,69,95,55,65),
- ('TG/2022/1587','ICT1242',90,65,88,94,85,80),
- ('TG/2022/1343','ICT1242',66,75,65,85,45,50),
- ('TG/2022/1388','ICT1242',64,55,25,75,75,50),
- ('TG/2022/1453','ICT1242',75,30,14,80,70,45),
- ('TG/2022/1410','ICT1242',55,50,72,100,49,82),
- ('TG/2021/1025','ICT1242',65,40,38,77,40,74),
- ('TG/2022/1476','ICT1242',50,55,84,82,65,45),
- ('TG/2022/1594','ICT1242',44,85,94,68,88,76),
- ('TG/2022/1583','ICT1242',35,89,76,100,41,69),
- ('TG/2021/1087','ICT1242',72,84,20,78,76,60),
- ('TG/2022/1380','ICT1242',60,51,48,80,94,55),
- ('TG/2020/1055','ICT1242',40,33,85,80,50,45),
- ('TG/2022/1350','ICT1242',92,50,68,77,35,94);
+ ('TG1310',80,77,69,95,55,65),
+ ('TG1587',90,65,88,94,85,80),
+ ('TG1343',66,75,65,85,45,50),
+ ('TG1388',64,55,25,75,75,50),
+ ('TG1453',75,30,14,80,70,45),
+ ('TG1410',55,50,72,100,49,82),
+ ('TG1025',65,40,38,77,40,74),
+ ('TG1476',50,55,84,82,65,45),
+ ('TG1594',44,85,94,68,88,76),
+ ('TG1583',35,89,76,100,41,69),
+ ('TG1087',72,84,20,78,76,60),
+ ('TG1380',60,51,48,80,94,55),
+ ('TG1055',40,33,85,80,50,45),
+ ('TG1350',92,50,68,77,35,94);
 
 
 INSERT INTO CompNetwork_ICT1253_marks
-(student_id,CouId,quiz_1,quiz_2,quiz_3,inclass_assignment,practical_assignment,end_theory,end_practical)
+(student_id,quiz_1,quiz_2,quiz_3,inclass_assignment,practical_assignment,end_theory,end_practical)
 VALUES
- ('TG/2022/1310','ICT1253',90,95,98,85,75,75,80),
- ('TG/2022/1587','ICT1253',87,85,95,75,55,50,80),
- ('TG/2022/1343','ICT1253',80,85,86,72,84,46,45),
- ('TG/2022/1388','ICT1253',75,88,65,65,80,55,75),
- ('TG/2022/1453','ICT1253',97,90,75,88,88,94,84),
- ('TG/2022/1410','ICT1253',55,64,62,84,45,94,78),
- ('TG/2022/1476','ICT1253',84,90,95,90,55,60,72),
- ('TG/2022/1594','ICT1253',95,86,80,64,62,48,65),
- ('TG/2022/1583','ICT1253',79,75,88,79,80,78,95),
- ('TG/2022/1380','ICT1253',88,75,84,90,45,65,55),
- ('TG/2020/1055','ICT1253',90,95,58,54,50,90,94),
- ('TG/2022/1350','ICT1253',95,54,25,82,76,65,65);
+ ('TG1310',90,95,98,85,75,75,80),
+ ('TG1587',87,85,95,75,55,50,80),
+ ('TG1343',80,85,86,72,84,46,45),
+ ('TG1388',75,88,65,65,80,55,75),
+ ('TG1453',97,90,75,88,88,94,84),
+ ('TG1410',55,64,62,84,45,94,78),
+ ('TG1476',84,90,95,90,55,60,72),
+ ('TG1594',95,86,80,64,62,48,65),
+ ('TG1583',79,75,88,79,80,78,95),
+ ('TG1380',88,75,84,90,45,65,55),
+ ('TG1055',90,95,58,54,50,90,94),
+ ('TG1350',95,54,25,82,76,65,65);
 
 
 INSERT INTO  Discrete_maths_TMS1233_marks
-(student_id,CouId,quiz_1,quiz_2,quiz_3,tutorial_assignment,mid_exam,end_exam)
+(student_id,quiz_1,quiz_2,quiz_3,tutorial_assignment,mid_exam,end_exam)
 VALUES
- ('TG/2022/1310','TMS1233',90,98,80,85,80,75),
- ('TG/2022/1587','TMS1233',95,54,25,82,76,65),
- ('TG/2022/1343','TMS1233',55,64,62,84,45,78),
- ('TG/2022/1388','TMS1233',90,95,58,54,50,90),
- ('TG/2022/1453','TMS1233',87,85,25,98,70,75),
- ('TG/2022/1410','TMS1233',84,90,95,90,55,60),
- ('TG/2022/1476','TMS1233',75,70,88,70,95,85),
- ('TG/2022/1594','TMS1233',90,65,70,78,79,64),
- ('TG/2022/1583','TMS1233',80,77,69,95,55,65),
- ('TG/2022/1380','TMS1233',92,50,68,77,35,94),
- ('TG/2022/1350','TMS1233',45,40,25,84,60,75);
+ ('TG1310',90,98,80,85,80,75),
+ ('TG1587',95,54,25,82,76,65),
+ ('TG1343',55,64,62,84,45,78),
+ ('TG1388',90,95,58,54,50,90),
+ ('TG1453',87,85,25,98,70,75),
+ ('TG1410',84,90,95,90,55,60),
+ ('TG1476',75,70,88,70,95,85),
+ ('TG1594',90,65,70,78,79,64),
+ ('TG1583',80,77,69,95,55,65),
+ ('TG1380',92,50,68,77,35,94),
+ ('TG1350',45,40,25,84,60,75);
 
 
 
 INSERT INTO Management_TCS1212_marks
-(student_id,CouId,quiz_1,quiz_2,quiz_3,mid_exam,end_exam)
+(student_id,quiz_1,quiz_2,quiz_3,mid_exam,end_exam)
 VALUES
- ('TG/2022/1310','TCS1212',50,45,25,56,45),
- ('TG/2022/1587','TCS1212',80,77,95,55,65),
- ('TG/2022/1343','TCS1212',75,88,94,75,75),
- ('TG/2022/1388','TCS1212',90,25,35,65,40),
- ('TG/2022/1453','TCS1212',75,75,41,45,55),
- ('TG/2000/1042','TCS1212',45,45,63,50,50), 
- ('TG/2021/1245','TCS1212',44,85,68,88,76),
- ('TG/2022/1410','TCS1212',35,89,76,41,69),
- ('TG/2022/1476','TCS1212',45,40,84,60,75),
- ('TG/2022/1594','TCS1212',54,35,65,56,64),
- ('TG/2022/1583','TCS1212',66,75,65,45,50),
- ('TG/2021/1087','TCS1212',65,50,40,48,59),
- ('TG/2022/1380','TCS1212',64,55,75,75,50),
- ('TG/2022/1350','TCS1212',40,33,80,50,45);
+ ('TG1310',50,45,25,56,45),
+ ('TG1587',80,77,95,55,65),
+ ('TG1343',75,88,94,75,75),
+ ('TG1388',90,25,35,65,40),
+ ('TG1453',75,75,41,45,55),
+ ('TG1042',45,45,63,50,50), 
+ ('TG1245',44,85,68,88,76),
+ ('TG1410',35,89,76,41,69),
+ ('TG1476',45,40,84,60,75),
+ ('TG1594',54,35,65,56,64),
+ ('TG1583',66,75,65,45,50),
+ ('TG1087',65,50,40,48,59),
+ ('TG1380',64,55,75,75,50),
+ ('TG1350',40,33,80,50,45);
 
 
 
@@ -284,22 +260,22 @@ VALUES
 
 
 INSERT INTO English_ENG1222_marks
-(student_id,CouId,quiz_1,quiz_2,quiz_3,mid_exam,end_exam)
+(student_id,quiz_1,quiz_2,quiz_3,mid_exam,end_exam)
 VALUES
- ('TG/2022/1310','ENG1222',88,50,45,65,75),
- ('TG/2022/1587','ENG1222',80,77,69,55,65),
- ('TG/2022/1343','ENG1222',44,85,94,88,76),
- ('TG/2022/1388','ENG1222',51,48,80,45,70),
- ('TG/2021/1125','ENG1222',64,55,25,75,50),
- ('TG/2022/1453','ENG1222',40,33,85,50,45),
- ('TG/2000/1042','ENG1222',65,50,40,48,59), 
- ('TG/2022/1410','ENG1222',50,55,84,65,45),
- ('TG/2021/1025','ENG1222',65,70,60,48,59),
- ('TG/2022/1476','ENG1222',90,65,94,85,80),
- ('TG/2022/1594','ENG1222',40,33,85,50,45),
- ('TG/2022/1583','ENG1222',72,84,78,76,60),
- ('TG/2022/1380','ENG1222',64,55,75,75,50),
- ('TG/2022/1350','ENG1222',66,75,65,45,50);
+ ('TG1310',88,50,45,65,75),
+ ('TG1587',80,77,69,55,65),
+ ('TG1343',44,85,94,88,76),
+ ('TG1388',51,48,80,45,70),
+ ('TG1125',64,55,25,75,50),
+ ('TG1453',40,33,85,50,45),
+ ('TG1042',65,50,40,48,59), 
+ ('TG1410',50,55,84,65,45),
+ ('TG1025',65,70,60,48,59),
+ ('TG1476',90,65,94,85,80),
+ ('TG1594',40,33,85,50,45),
+ ('TG1583',72,84,78,76,60),
+ ('TG1380',64,55,75,75,50),
+ ('TG1350',66,75,65,45,50);
 
 
 

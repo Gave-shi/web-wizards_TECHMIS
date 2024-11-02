@@ -58,15 +58,13 @@ CREATE TABLE Student_Eligibility (
     ca_marks DECIMAL(5, 2) NOT NULL, -- Continuous Assessment Marks
     attendance_percentage DECIMAL(5, 2) NOT NULL, -- Attendance Percentage
    -- scaled_CA_marks DECIMAL(5, 2),
-    eligibility_status VARCHAR(10),/* GENERATED ALWAYS AS (
+    eligibility_status VARCHAR(10)/* GENERATED ALWAYS AS (
         CASE 
             WHEN attendance_percentage >= 80 AND scaled_CA_marks >= 50 THEN 'Eligible'
             ELSE 'Not Eligible'
         END
     ) STORED,*/
-    PRIMARY KEY (student_id, course_id),
-    FOREIGN KEY (student_id) REFERENCES STUDENT(student_id),
-    FOREIGN KEY (course_id) REFERENCES COURSE(course_id)
+    
 );
 
 
@@ -84,7 +82,7 @@ SELECT
         ELSE 'Not Eligible'
     END AS eligibility_status 
 FROM 
-    English_ICT1222_marks EM
+    English_ENG1222_marks EM
 JOIN 
     Student_Attendance SA ON EM.student_id = SA.Stu_reg_num; -- Ensure this matches the correct field in the Attendance Table
 
