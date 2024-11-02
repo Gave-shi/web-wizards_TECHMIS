@@ -418,3 +418,16 @@ CALL InsertStudentGrades_TCS1212();
 CALL InsertStudentGrades_ENG1222();
 
 
+DESCRIBE Student_grade;
+DESCRIBE Student_Attandance;
+DESCRIBE English_ENG1222_marks;
+DESCRIBE DBMS_Theory_ICT1212_marks;
+DESCRIBE DBMS_Practical_ICT1222_marks;
+DESCRIBE Serverside_ICT1233_marks;
+DESCRIBE CompNetwork_ICT1253_marks;
+DESCRIBE Discrete_maths_TMS1233_marks;
+DESCRIBE Course;
+DESCRIBE Student;
+DESCRIBE Lecturer;
+CREATE PROCEDURE VIEW_STUDENT_GRADES_AS_BATCH(IN batch_id CHAR(10))
+
