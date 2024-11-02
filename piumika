@@ -265,127 +265,153 @@ WHERE
 
 -----------------------------------Student_Performance (GPA) TABLE -------------------------------------
 
+
 CREATE TABLE Student_Performance (
     student_id VARCHAR(10) NOT NULL,
-    semester INT NOT NULL,
-    total_credits INT DEFAULT 0,
-    total_grade_points DECIMAL(10, 2) DEFAULT 0.00,
-    SGPA DECIMAL(3, 2) GENERATED ALWAYS AS (
-        CASE 
-            WHEN total_credits = 0 THEN 0.00
-            ELSE total_grade_points / total_credits
-        END
-    ) STORED,
-    GPA DECIMAL(3, 2) GENERATED ALWAYS AS (
-        CASE 
-            WHEN total_credits = 0 THEN 0.00
-            ELSE total_grade_points / total_credits
-        END
-    ) STORED,
-    CGPA DECIMAL(3, 2) DEFAULT 0.00,  -- This will need to be updated periodically
-    PRIMARY KEY (student_id, semester),
+    semester_no INT NOT NULL DEFAULT 1,
+    SGPA DECIMAL(3,2),
+    CGPA DECIMAL(3,2),
+    GPA DECIMAL(3,2),
+    PRIMARY KEY (student_id, semester_no),
     FOREIGN KEY (student_id) REFERENCES STUDENT(student_id)
 );
 
 
+---------------------------Data insert to  Student_Performance (GPA) TABLE -----------
 
--- Now insert data into Student_Performance
-INSERT INTO Student_Performance (student_id, semester, total_credits, total_grade_points)
+
+INSERT INTO Student_Performance (student_id, semester_no,Full_SGPA,CGPA,GPA)
 SELECT 
     sg.student_id,
-    sg.semester,
-    SUM(c.CouCredit) AS total_credits,
-    SUM(c.CouCredit * 
-        CASE 
-            WHEN sg.grade = 'A+' THEN 4.00
-            WHEN sg.grade = 'A'  THEN 4.00
-            WHEN sg.grade = 'A-' THEN 3.70
-            WHEN sg.grade = 'B+' THEN 3.30
-            WHEN sg.grade = 'B'  THEN 3.00
-            WHEN sg.grade = 'B-' THEN 2.70
-            WHEN sg.grade = 'C+' THEN 2.30
-            WHEN sg.grade = 'C'  THEN 2.00
-            WHEN sg.grade = 'C-' THEN 1.70
-            WHEN sg.grade = 'D'  THEN 1.00
-            WHEN sg.grade = 'E'  THEN 0.00
-            ELSE 0.00
-        END
-    ) AS total_grade_points
+    1 AS semester_no,
+    (SUM(c.CouCredit * CASE 
+        WHEN sg.Final_marks >= 90 THEN 4.00
+        WHEN sg.Final_marks >= 85 THEN 3.70
+        WHEN sg.Final_marks >= 80 THEN 3.30
+        WHEN sg.Final_marks >= 75 THEN 3.00
+        WHEN sg.Final_marks >= 70 THEN 2.70
+        WHEN sg.Final_marks >= 65 THEN 2.30
+        WHEN sg.Final_marks >= 60 THEN 2.00
+        WHEN sg.Final_marks >= 55 THEN 1.70
+        WHEN sg.Final_marks >= 50 THEN 1.30
+        WHEN sg.Final_marks >= 45 THEN 1.00
+        ELSE 0.00
+    END) / NULLIF(SUM(c.CouCredit), 0)) AS Full_SGPA,
+    NULL AS CGPA,
+    NULL AS GPA 
 FROM 
     Student_grade sg
 JOIN 
     Course c ON sg.Course_id = c.CouId
 GROUP BY 
-    sg.student_id, sg.semester;
+    sg.student_id;
 
+  
 
-----------------------------------Procedure to Calculate SGPA for a Single Student------------------------
-DELIMITER //
-
-CREATE PROCEDURE Calculate_SGPA(IN studentID VARCHAR(10), OUT sgpa DECIMAL(5,2))
-BEGIN
+-----------CGPA for each student (current semester)----
+/*UPDATE Student_Performance sp
+SET CGPA = (
     SELECT 
-        SUM(gp.grade_point) / COUNT(*) INTO sgpa
+        AVG(Full_SGPA)
     FROM 
-        Student_Grades sg
-    JOIN 
-        Grade_Points gp ON sg.grade = gp.grade
+        Student_Performance sp,Student_grade sg
     WHERE 
-        sg.student_id = studentID;
-END //
+        sg.student_id = sp.student_id 
+);
+*/
 
-DELIMITER ;
------------------------------------Procedure to Calculate CGPA for a Single Student------------------------
-DELIMITER //
 
-CREATE PROCEDURE Calculate_CGPA(IN studentID VARCHAR(10), OUT cgpa DECIMAL(5,2))
-BEGIN
+
+-- Update CGPA for each student (current semester)
+UPDATE Student_Performance sp
+SET CGPA = (
     SELECT 
-        AVG(sgpa) INTO cgpa
+        AVG(sp2.Full_SGPA)  -- Use SGPA from the same table with alias sp2
     FROM 
-        (SELECT 
-            SUM(gp.grade_point) / COUNT(*) AS sgpa
-         FROM 
-            Student_Grades sg
-         JOIN 
-            Grade_Points gp ON sg.grade = gp.grade
-         WHERE 
-            sg.student_id = studentID
-         GROUP BY 
-            sg.subject_code) AS temp;
-END //
+        Student_Performance sp2  -- Alias for the same table
+    WHERE 
+        sp2.student_id = sp.student_id AND sp2.semester_no <= sp.semester_no
+);
 
-DELIMITER ;
--------------------------------------Procedure to Calculate Average SGPA for All Students in a Batch----------------
-DELIMITER //
 
-CREATE PROCEDURE Calculate_Batch_SGPA(OUT batch_avg_sgpa DECIMAL(5,2))
-BEGIN
+
+-----------  GPA for each student------------------
+
+/*
+UPDATE Student_Performance sp
+SET GPA = (
     SELECT 
-        AVG(sgpa) INTO batch_avg_sgpa
+        AVG(Full_SGPA)
     FROM 
-        (SELECT 
-            SUM(gp.grade_point) / COUNT(*) AS sgpa
-         FROM 
-            Student_Grades sg
-         JOIN 
-            Grade_Points gp ON sg.grade = gp.grade
-         GROUP BY 
-            sg.student_id) AS temp;
-END //
+        Student_Performance sg
+    WHERE 
+        sg.student_id = sp.student_id
+);
+*/
 
-DELIMITER ;
+
+-- Update GPA for each student
+UPDATE Student_Performance sp
+SET GPA = (
+    SELECT 
+        AVG(sp2.SGPA)  -- Use SGPA from the same table with alias sp2
+    FROM 
+        Student_Performance sp2  -- Alias for the same table
+    WHERE 
+        sp2.student_id = sp.student_id
+);
+
+
+
+
+
+----------------------------------Procedure to get performances for a Single Student------------------------
+DELIMITER //
+CREATE PROCEDURE GetStudentPerformance(IN studentID VARCHAR(10),OUT sgpa DECIMAL(5,2))
+BEGIN
+    SELECT
+        sp.student_id,
+        sg.Course_id,
+        sp.semester_no,
+        sp.Full_SGPA,
+        sp.CGPA,
+        sg.grade
+    FROM 
+        Student_grade sg,Student_Performance sp
+    WHERE
+        sp.student_id=sg.student_id AND sp.student_id=studentID;
+END//
+DELIMITER;
+    
+
+-------------------------------------Procedure to performance of All Students in a Batch----------------
+DELIMITER //
+CREATE PROCEDURE GetBatchPerformance(IN batch_year INT)
+BEGIN
+    SELECT
+        sp.student_id,
+        sg.Course_id,
+        sp.semester_no,
+        sp.Full_SGPA,
+        sp.CGPA,
+        sg.grade
+    FROM
+         Student_grade sg,Student_Performance sp
+    WHERE
+        sp.student_id=sg.student_id;
+       sp.student_id(SUBSTRING(student_id, 4, 4))=batch_year;
+END//
+DELIMITER;
+
+
 ------------------------------------Calling the Procedures----------------------------------------
 ---------------------------------------------------------------------------------------------------
-------------------------------Calculate SGPA for a Student-----------------------------------------
-CALL Calculate_SGPA('TG/2022/1415', @student_sgpa);
-SELECT @student_sgpa AS SGPA;
 
--------------------------------Calculate CGPA for a Student----------------------------------------
-CALL Calculate_CGPA('TG/2022/1415', @student_cgpa);
-SELECT @student_cgpa AS CGPA;
 
---------------------------------Calculate Average SGPA for All Students in a Batch------------------
-CALL Calculate_Batch_SGPA(@batch_avg_sgpa);
-SELECT @batch_avg_sgpa AS Batch_Average_SGPA;
+----------To get the performance for a specific student----------------
 
+CALL GetStudentPerformance('TG/2022/1415');
+
+--To get the performance for all students --------------------
+
+CALL GetBatchPerformance(2022);
