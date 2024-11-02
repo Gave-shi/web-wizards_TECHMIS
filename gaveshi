@@ -77,7 +77,7 @@ CREATE TABLE computer_Archi_ICT1242_marks(
 );
 
 -- Computer Networks Table
-CREATE TABLE CompNetwork_ICT1233_marks(
+CREATE TABLE CompNetwork_ICT1253_marks(
     student_id VARCHAR(10) NOT NULL,
     quiz_1 INT DEFAULT 0,
     quiz_2 INT DEFAULT 0,
