@@ -310,9 +310,9 @@ SELECT
         END
     ) AS total_grade_points
 FROM 
-    Student_grade sg
+    Student_grade AS sg
 JOIN 
-    Course c ON sg.Course_id = c.CouId
+    Course AS c ON sg.Course_id = c.CouId
 GROUP BY 
     sg.student_id, sg.semester;
 
