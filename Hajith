@@ -186,7 +186,8 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     )
 );
 
-ALTER TABLE
+ALTER TABLE Student_Attandance
+ADD FOREIGN KEY (Stu_reg_num ) REFERENCES Studente(student_id);
 
 INSERT INTO Student_Attandance 
 (Stu_reg_num, Course_Id, week_01, week_02, week_03, week_04, week_05, week_06, week_07, week_08, week_09, week_10, week_11, week_12, week_13, week_14, week_15) 
