@@ -418,3 +418,53 @@ CALL InsertStudentGrades_TCS1212();
 CALL InsertStudentGrades_ENG1222();
 
 
+DESCRIBE Student_grade;
+DESCRIBE Student_Attandance;
+DESCRIBE English_ENG1222_marks;
+DESCRIBE DBMS_Theory_ICT1212_marks;
+DESCRIBE DBMS_Practical_ICT1222_marks;
+DESCRIBE Serverside_ICT1233_marks;
+DESCRIBE CompNetwork_ICT1253_marks;
+DESCRIBE Discrete_maths_TMS1233_marks;
+DESCRIBE Course;
+DESCRIBE Student;
+DESCRIBE Lecturer;
+
+DELIMITER //
+
+CREATE PROCEDURE VIEW_STUDENT_GRADES_AS_BATCH(IN state_of_student VARCHAR(20))
+BEGIN
+    SELECT * FROM Student_grade
+    WHERE student_id IN (SELECT DISTINCT state_of_student FROM Student WHERE state_of_student = state_of_student);
+END //
+
+DELIMITER ;
+CALL VIEW_STUDENT_GRADES_AS_BATCH('repeat');
+
+
+DELIMITER //
+
+CREATE PROCEDURE GetStudentDetailsByBatch(
+    IN batchType VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        S.student_id,
+        CONCAT(S.fname, ' ', S.lname) AS StudentName,
+        SG.Course_id,
+        SG.grade,
+        SP.SGPA,
+        SP.CGPA
+    FROM 
+        STUDENT AS S
+    JOIN 
+        Student_grade AS SG ON S.student_id = SG.student_id
+    JOIN 
+        Student_Performance AS SP ON S.student_id = SP.student_id
+    WHERE 
+        S.state_of_student = batchType;
+END;
+
+//
+
+DELIMITER ;
