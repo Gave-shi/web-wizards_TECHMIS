@@ -477,7 +477,7 @@ CALL GetStudentPerformance('TG/2022/1410', @sgpa_output);
 
 
 
---To get the performance for all students --------------------
+--------------------------To get the performance for all students --------------------
 
 CALL GetBatchPerformance(2022);
 
