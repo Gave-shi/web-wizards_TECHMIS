@@ -62,7 +62,7 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     Final_marks DECIMAL(5,2) NOT NULL,
     grade VARCHAR(5) GENERATED ALWAYS AS (
         CASE 
-            WHEN Final_marks== 0   THEN "MC"
+            WHEN Final_marks < 0   THEN 'MC'
             WHEN Final_marks >= 90 THEN 'A+'
             WHEN Final_marks >= 85 THEN 'A'
             WHEN Final_marks >= 80 THEN 'A-'
@@ -76,27 +76,32 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
             ELSE 'E'
         END
     ),
-    SGPA DECIMAL (3,2) GENERATED ALWAYS AS 
-    (
+    SGPA DECIMAL(3,2) GENERATED ALWAYS AS (
         CASE 
-            WHEN grade ="A+" OR "A" THEN  4.00
-            WHEN grade ="A-" THEN  3.70
-            WHEN grade ="B+" THEN 3.30
-            WHEN grade ="B"  THEN  3.00
-            WHEN grade ="B-" THEN  2.70
-            WHEN grade ="C+" THEN  2.30
-            WHEN grade ="C"  THEN  2.00
-            WHEN grade ="C-" THEN  1.70
-            WHEN grade ="D+" THEN  1.30
-            WHEN grade ="D"  THEN  1.00
-            WHEN grade ="E"  THEN  0.00 
+            WHEN grade = 'A+' OR grade = 'A' THEN 4.00
+            WHEN grade = 'A-' THEN 3.70
+            WHEN grade = 'B+' THEN 3.30
+            WHEN grade = 'B'  THEN 3.00
+            WHEN grade = 'B-' THEN 2.70
+            WHEN grade = 'C+' THEN 2.30
+            WHEN grade = 'C'  THEN 2.00
+            WHEN grade = 'C-' THEN 1.70
+            WHEN grade = 'D'  THEN 1.00
+            WHEN grade = 'E'  THEN 0.00
         END
     )
 );
 
+CREATE TABLE users (
+  user_id char(7) NOT NULL,
+  user_name varchar(50) NOT NULL,
+  password varchar(255) NOT NULL,
+  user_type varchar(50) NOT NULL,
+  PRIMARY KEY (user_id)
+);
+
 ALTER TABLE Student_Attandance
 ADD FOREIGN KEY (Stu_reg_num ) REFERENCES Student(student_id);
-
 
 ALTER TABLE English_ENG1222_marks
 ADD FOREIGN KEY (student_id ) REFERENCES Student(student_id);
@@ -210,7 +215,15 @@ VALUES
 ('TG/2022/1350', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG/2022/1350', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 
-
+INSERT INTO users  VALUES 
+('A001','Kusal Mendis','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','Admin'),
+('D001','PROF. Mr. Subash jayasinghe','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','Dean'),
+('H001','PROF. Mr. Subash jayasinghe','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','HOD'),
+('TO001','Anjana Nirmal','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer'),
+('TO002','Sapumal Bandara','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer'),
+('TO003','Prakeerthan','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer'),
+('TO004','Pemakaran','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer'),
+('TO005','Akram','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer');
 
 DELIMITER //
 
@@ -221,7 +234,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM DBMS_Theory_ICT1212_marks;
+        SELECT student_id, Finl_marks FROM DBMS_Theory_ICT1212_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -245,7 +258,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM DBMS_Practical_ICT1222_marks;
+        SELECT student_id, Finl_marks FROM DBMS_Practical_ICT1222_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -269,7 +282,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM computer_Archi_ICT1242_marks;
+        SELECT student_id, Finl_marks FROM computer_Archi_ICT1242_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -292,7 +305,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM CompNetwork_ICT1253_marks;
+        SELECT student_id, Finl_marks FROM CompNetwork_ICT1253_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -316,7 +329,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM Serverside_ICT1233_marks;
+        SELECT student_id, Finl_marks FROM Serverside_ICT1233_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -340,7 +353,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM Discrete_maths_TMS1233_marks;
+        SELECT student_id, Finl_marks FROM Discrete_maths_TMS1233_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -364,7 +377,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM Management_TCS1212_marks;
+        SELECT student_id, Finl_marks FROM Management_TCS1212_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -388,7 +401,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM English_ENG1222_marks;
+        SELECT student_id, Finl_marks FROM English_ENG1222_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -418,17 +431,6 @@ CALL InsertStudentGrades_TCS1212();
 CALL InsertStudentGrades_ENG1222();
 
 
-DESCRIBE Student_grade;
-DESCRIBE Student_Attandance;
-DESCRIBE English_ENG1222_marks;
-DESCRIBE DBMS_Theory_ICT1212_marks;
-DESCRIBE DBMS_Practical_ICT1222_marks;
-DESCRIBE Serverside_ICT1233_marks;
-DESCRIBE CompNetwork_ICT1253_marks;
-DESCRIBE Discrete_maths_TMS1233_marks;
-DESCRIBE Course;
-DESCRIBE Student;
-DESCRIBE Lecturer;
 
 DELIMITER //
 
@@ -451,20 +453,116 @@ BEGIN
     SELECT 
         S.student_id,
         CONCAT(S.fname, ' ', S.lname) AS StudentName,
-        SG.Course_id,
-        SG.grade,
-        SP.SGPA,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ENG1222' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ENG1222' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ENG1222' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ENG1222,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1212' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1212' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1212' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1212,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1222' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1222' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1222' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1222,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1233' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1233' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1233' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1233,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1242' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1242' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1242' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1242,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1253' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1253' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1253' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1253,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'TCS1212' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'TCS1212' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'TCS1212' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS TCS1212,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'TMS1233' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'TMS1233' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'TMS1233' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS TMS1233,
+        SP.Full_SGPA,
         SP.CGPA
     FROM 
         STUDENT AS S
-    JOIN 
-        Student_grade AS SG ON S.student_id = SG.student_id
     JOIN 
         Student_Performance AS SP ON S.student_id = SP.student_id
     WHERE 
         S.state_of_student = batchType;
 END;
-
 //
 
 DELIMITER ;
+
+CALL GetStudentDetailsByBatch('repeat');
+
+
+
+
+CREATE VIEW Attendance_Eligibility AS
+SELECT DISTINCT
+    SA.Stu_reg_num, 
+    CONCAT(S.fname, ' ', S.lname) AS Full_Name,
+    (CASE 
+        WHEN SA.Percentage >= 80.00 THEN 'Eligible'
+        ELSE 'Not Eligible'
+    END) AS eligibility
+FROM 
+    Student_Attandance AS SA
+JOIN 
+    Student AS S ON SA.Stu_reg_num = S.student_id;
+
+SELECT * FROM Attendance_Eligibility;
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin@pwd'
+GRANT ALL PRIVILEGES ON SIMS.* TO 'admin'@'localhost' WITH GRANT OPTION
+FLUSH PRIVILEGES;
+
+-- Create user 'dean'
+CREATE USER 'dean'@'localhost' 
+IDENTIFIED BY 'dean@pwd';
+
+-- Create user 'lecturer'
+CREATE USER 'lecturer'@'localhost' 
+IDENTIFIED BY 'lecturer@pwd';
+
+-- Create user 'student' and grant SELECT permissions
+CREATE USER 'student'@'localhost' 
+IDENTIFIED BY 'student@pwd';
+
+GRANT SELECT ON SIMS.student_eligibility TO 'student'@'localhost';
+GRANT SELECT ON SIMS.student_performance TO 'student'@'localhost';
+
+-- Create user 'tech_officer' and grant specific permissions
+CREATE USER 'tech_officer'@'localhost' 
+IDENTIFIED BY 'tech_officer@pwd';
+
+GRANT SELECT, UPDATE, INSERT ON SIMS. student_attandance TO 'tech_officer'@'localhost';

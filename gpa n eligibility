@@ -55,7 +55,7 @@ VALUES
 
 
 CREATE TABLE Student_Eligibility (
-    student_id VARCHAR(10) NOT NULL,
+    student_id VARCHAR(12) NOT NULL,
     course_id CHAR(7) NOT NULL,
     ca_marks DECIMAL(5, 2) NOT NULL, 
     attendance_percentage DECIMAL(5, 2) NOT NULL,
