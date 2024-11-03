@@ -103,7 +103,6 @@ CREATE TABLE users (
 ALTER TABLE Student_Attandance
 ADD FOREIGN KEY (Stu_reg_num ) REFERENCES Student(student_id);
 
-
 ALTER TABLE English_ENG1222_marks
 ADD FOREIGN KEY (student_id ) REFERENCES Student(student_id);
 ALTER TABLE DBMS_Theory_ICT1212_marks
@@ -431,28 +430,7 @@ CALL InsertStudentGrades_TMS1233();
 CALL InsertStudentGrades_TCS1212();
 CALL InsertStudentGrades_ENG1222();
 
-DROP PROCEDURE InsertStudentGrades_ICT1212;
-DROP PROCEDURE InsertStudentGrades_ICT1222;
-DROP PROCEDURE InsertStudentGrades_ICT1242;
-DROP PROCEDURE InsertStudentGrades_ICT1253;
-DROP PROCEDURE InsertStudentGrades_ICT1233;
-DROP PROCEDURE InsertStudentGrades_TMS1233;
-DROP PROCEDURE InsertStudentGrades_TCS1212;
-DROP PROCEDURE InsertStudentGrades_ENG1222;
 
-
-
-DESCRIBE Student_grade;
-DESCRIBE Student_Attandance;
-DESCRIBE English_ENG1222_marks;
-DESCRIBE DBMS_Theory_ICT1212_marks;
-DESCRIBE DBMS_Practical_ICT1222_marks;
-DESCRIBE Serverside_ICT1233_marks;
-DESCRIBE CompNetwork_ICT1253_marks;
-DESCRIBE Discrete_maths_TMS1233_marks;
-DESCRIBE Course;
-DESCRIBE Student;
-DESCRIBE Lecturer;
 
 DELIMITER //
 
@@ -475,20 +453,116 @@ BEGIN
     SELECT 
         S.student_id,
         CONCAT(S.fname, ' ', S.lname) AS StudentName,
-        SG.Course_id,
-        SG.grade,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ENG1222' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ENG1222' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ENG1222' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ENG1222,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1212' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1212' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1212' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1212,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1222' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1222' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1222' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1222,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1233' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1233' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1233' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1233,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1242' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1242' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1242' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1242,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1253' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1253' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'ICT1253' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS ICT1253,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'TCS1212' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'TCS1212' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'TCS1212' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS TCS1212,
+        COALESCE(
+            CASE 
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'TMS1233' AND student_id = S.student_id) IS NULL THEN 'No Repeat'
+                WHEN (SELECT grade FROM Student_grade WHERE Course_id = 'TMS1233' AND student_id = S.student_id) IN ('C', 'C+') THEN (SELECT grade FROM Student_grade WHERE Course_id = 'TMS1233' AND student_id = S.student_id)
+                ELSE 'C+'
+            END, 'No Repeat'
+        ) AS TMS1233,
         SP.Full_SGPA,
         SP.CGPA
     FROM 
         STUDENT AS S
     JOIN 
-        Student_grade AS SG ON S.student_id = SG.student_id
-    JOIN 
         Student_Performance AS SP ON S.student_id = SP.student_id
     WHERE 
         S.state_of_student = batchType;
 END;
-
 //
 
 DELIMITER ;
+
+CALL GetStudentDetailsByBatch('repeat');
+
+
+
+
+CREATE VIEW Attendance_Eligibility AS
+SELECT DISTINCT
+    SA.Stu_reg_num, 
+    CONCAT(S.fname, ' ', S.lname) AS Full_Name,
+    (CASE 
+        WHEN SA.Percentage >= 80.00 THEN 'Eligible'
+        ELSE 'Not Eligible'
+    END) AS eligibility
+FROM 
+    Student_Attandance AS SA
+JOIN 
+    Student AS S ON SA.Stu_reg_num = S.student_id;
+
+SELECT * FROM Attendance_Eligibility;
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin@pwd'
+GRANT ALL PRIVILEGES ON SIMS.* TO 'admin'@'localhost' WITH GRANT OPTION
+FLUSH PRIVILEGES;
+
+-- Create user 'dean'
+CREATE USER 'dean'@'localhost' 
+IDENTIFIED BY 'dean@pwd';
+
+-- Create user 'lecturer'
+CREATE USER 'lecturer'@'localhost' 
+IDENTIFIED BY 'lecturer@pwd';
+
+-- Create user 'student' and grant SELECT permissions
+CREATE USER 'student'@'localhost' 
+IDENTIFIED BY 'student@pwd';
+
+GRANT SELECT ON SIMS.student_eligibility TO 'student'@'localhost';
+GRANT SELECT ON SIMS.student_performance TO 'student'@'localhost';
+
+-- Create user 'tech_officer' and grant specific permissions
+CREATE USER 'tech_officer'@'localhost' 
+IDENTIFIED BY 'tech_officer@pwd';
+
+GRANT SELECT, UPDATE, INSERT ON SIMS. student_attandance TO 'tech_officer'@'localhost';
