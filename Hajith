@@ -92,6 +92,14 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     )
 );
 
+CREATE TABLE users (
+  user_id char(7) NOT NULL,
+  user_name varchar(50) NOT NULL,
+  password varchar(255) NOT NULL,
+  user_type varchar(50) NOT NULL,
+  PRIMARY KEY (user_id)
+);
+
 ALTER TABLE Student_Attandance
 ADD FOREIGN KEY (Stu_reg_num ) REFERENCES Student(student_id);
 
@@ -208,7 +216,15 @@ VALUES
 ('TG/2022/1350', 'TCS1212', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'),
 ('TG/2022/1350', 'TMS1233', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
 
-
+INSERT INTO users  VALUES 
+('A001','Kusal Mendis','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','Admin'),
+('D001','PROF. Mr. Subash jayasinghe','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','Dean'),
+('H001','PROF. Mr. Subash jayasinghe','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','HOD'),
+('TO001','Anjana Nirmal','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer'),
+('TO002','Sapumal Bandara','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer'),
+('TO003','Prakeerthan','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer'),
+('TO004','Pemakaran','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer'),
+('TO005','Akram','756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a','TechOfficer');
 
 DELIMITER //
 
@@ -461,7 +477,7 @@ BEGIN
         CONCAT(S.fname, ' ', S.lname) AS StudentName,
         SG.Course_id,
         SG.grade,
-        SP.SGPA,
+        SP.Full_SGPA,
         SP.CGPA
     FROM 
         STUDENT AS S
