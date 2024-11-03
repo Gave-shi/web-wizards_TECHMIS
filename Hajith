@@ -62,7 +62,7 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
     Final_marks DECIMAL(5,2) NOT NULL,
     grade VARCHAR(5) GENERATED ALWAYS AS (
         CASE 
-            WHEN Final_marks== 0   THEN "MC"
+            WHEN Final_marks < 0   THEN 'MC'
             WHEN Final_marks >= 90 THEN 'A+'
             WHEN Final_marks >= 85 THEN 'A'
             WHEN Final_marks >= 80 THEN 'A-'
@@ -76,20 +76,18 @@ CREATE TABLE Student_Attandance(Course_Id CHAR(7) NOT NULL,
             ELSE 'E'
         END
     ),
-    SGPA DECIMAL (3,2) GENERATED ALWAYS AS 
-    (
+    SGPA DECIMAL(3,2) GENERATED ALWAYS AS (
         CASE 
-            WHEN grade ="A+" OR "A" THEN  4.00
-            WHEN grade ="A-" THEN  3.70
-            WHEN grade ="B+" THEN 3.30
-            WHEN grade ="B"  THEN  3.00
-            WHEN grade ="B-" THEN  2.70
-            WHEN grade ="C+" THEN  2.30
-            WHEN grade ="C"  THEN  2.00
-            WHEN grade ="C-" THEN  1.70
-            WHEN grade ="D+" THEN  1.30
-            WHEN grade ="D"  THEN  1.00
-            WHEN grade ="E"  THEN  0.00 
+            WHEN grade = 'A+' OR grade = 'A' THEN 4.00
+            WHEN grade = 'A-' THEN 3.70
+            WHEN grade = 'B+' THEN 3.30
+            WHEN grade = 'B'  THEN 3.00
+            WHEN grade = 'B-' THEN 2.70
+            WHEN grade = 'C+' THEN 2.30
+            WHEN grade = 'C'  THEN 2.00
+            WHEN grade = 'C-' THEN 1.70
+            WHEN grade = 'D'  THEN 1.00
+            WHEN grade = 'E'  THEN 0.00
         END
     )
 );
@@ -221,7 +219,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM DBMS_Theory_ICT1212_marks;
+        SELECT student_id, Finl_marks FROM DBMS_Theory_ICT1212_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -245,7 +243,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM DBMS_Practical_ICT1222_marks;
+        SELECT student_id, Finl_marks FROM DBMS_Practical_ICT1222_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -269,7 +267,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM computer_Archi_ICT1242_marks;
+        SELECT student_id, Finl_marks FROM computer_Archi_ICT1242_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -292,7 +290,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM CompNetwork_ICT1253_marks;
+        SELECT student_id, Finl_marks FROM CompNetwork_ICT1253_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -316,7 +314,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM Serverside_ICT1233_marks;
+        SELECT student_id, Finl_marks FROM Serverside_ICT1233_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -340,7 +338,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM Discrete_maths_TMS1233_marks;
+        SELECT student_id, Finl_marks FROM Discrete_maths_TMS1233_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -364,7 +362,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM Management_TCS1212_marks;
+        SELECT student_id, Finl_marks FROM Management_TCS1212_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -388,7 +386,7 @@ BEGIN
     DECLARE final_marks_value DECIMAL(5,2);
 
     DECLARE student_cursor CURSOR FOR 
-        SELECT student_id, Final_marks FROM English_ENG1222_marks;
+        SELECT student_id, Finl_marks FROM English_ENG1222_marks;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     OPEN student_cursor;
@@ -416,6 +414,16 @@ CALL InsertStudentGrades_ICT1233();
 CALL InsertStudentGrades_TMS1233();
 CALL InsertStudentGrades_TCS1212();
 CALL InsertStudentGrades_ENG1222();
+
+DROP PROCEDURE InsertStudentGrades_ICT1212;
+DROP PROCEDURE InsertStudentGrades_ICT1222;
+DROP PROCEDURE InsertStudentGrades_ICT1242;
+DROP PROCEDURE InsertStudentGrades_ICT1253;
+DROP PROCEDURE InsertStudentGrades_ICT1233;
+DROP PROCEDURE InsertStudentGrades_TMS1233;
+DROP PROCEDURE InsertStudentGrades_TCS1212;
+DROP PROCEDURE InsertStudentGrades_ENG1222;
+
 
 
 DESCRIBE Student_grade;
